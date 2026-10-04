@@ -1,0 +1,133 @@
+﻿Rank,Stage,Model,N_models,ROC_AUC,MCC,CV,Time_s,Best_params,Notes,FS_method,Label
+1,2. Out-of-fold (single models),ExtraTrees,1,0.7746208303681247,0.40147329005807075,StratifiedKFold(5) / cross_val_predict,,,Average Precision = 0.8951,mi_catboost,label_cutoff_20%
+2,4. Tuned VotingClassifier,Vote(RF + ET + CatBoost),3,0.7721536901890248,,StratifiedKFold(5),715.3,"{'cat__depth': 6, 'cat__iterations': 300, 'cat__learning_rate': 0.05, 'et__max_features': 'sqrt', 'et__min_samples_split': 5, 'et__n_estimators': 300, 'rf__max_features': 'log2', 'rf__min_samples_split': 5, 'rf__n_estimators': 300}","soft voting, GridSearchCV",mi_catboost,label_cutoff_20%
+3,3. Soft-average ensemble search (OOF),RandomForest + ExtraTrees + SVM,3,0.7708651279119034,0.2879663174253923,StratifiedKFold(5) / OOF averaging,,,BEST για n=3,mi_catboost,label_cutoff_20%
+4,3. Soft-average ensemble search (OOF),RandomForest + ExtraTrees,2,0.7700177295482873,0.35256048309748633,StratifiedKFold(5) / OOF averaging,,,BEST για n=2,mi_catboost,label_cutoff_20%
+5,3. Soft-average ensemble search (OOF),ExtraTrees + NaiveBayes,2,0.7694294869949032,0.3258347300710633,StratifiedKFold(5) / OOF averaging,,,,mi_catboost,label_cutoff_20%
+6,3. Soft-average ensemble search (OOF),RandomForest + ExtraTrees + CatBoost + SVM,4,0.7690592644088574,0.3509495468007166,StratifiedKFold(5) / OOF averaging,,,BEST για n=4,mi_catboost,label_cutoff_20%
+7,3. Soft-average ensemble search (OOF),ExtraTrees + SVM,2,0.7683681822482382,0.313871748232776,StratifiedKFold(5) / OOF averaging,,,,mi_catboost,label_cutoff_20%
+8,3. Soft-average ensemble search (OOF),RandomForest + ExtraTrees + SVM + KNN,4,0.7677717125262755,0.2742185118418274,StratifiedKFold(5) / OOF averaging,,,,mi_catboost,label_cutoff_20%
+9,3. Soft-average ensemble search (OOF),ExtraTrees + CatBoost + SVM,3,0.767755258189118,0.3694294337228601,StratifiedKFold(5) / OOF averaging,,,,mi_catboost,label_cutoff_20%
+10,3. Soft-average ensemble search (OOF),RandomForest + ExtraTrees + CatBoost + SVM + KNN,5,0.7672492873215218,0.3450724567522948,StratifiedKFold(5) / OOF averaging,,,BEST για n=5,mi_catboost,label_cutoff_20%
+11,3. Soft-average ensemble search (OOF),RandomForest + ExtraTrees + CatBoost + SVM + NaiveBayes,5,0.7670148130170261,0.37725120888135416,StratifiedKFold(5) / OOF averaging,,,,mi_catboost,label_cutoff_20%
+12,3. Soft-average ensemble search (OOF),RandomForest + ExtraTrees + KNN,3,0.766488274227983,0.27358629866550027,StratifiedKFold(5) / OOF averaging,,,,mi_catboost,label_cutoff_20%
+13,1. GridSearchCV (single models),Random Forest,1,0.766114575845298,,StratifiedKFold(5),84.6,"{'max_depth': 20, 'max_features': 'sqrt', 'min_samples_split': 2, 'n_estimators': 500}",best_score_ του GridSearchCV,mi_catboost,label_cutoff_20%
+14,3. Soft-average ensemble search (OOF),ExtraTrees + CatBoost + SVM + NaiveBayes,4,0.7659452811017824,0.3781510025168177,StratifiedKFold(5) / OOF averaging,,,,mi_catboost,label_cutoff_20%
+15,3. Soft-average ensemble search (OOF),RandomForest + ExtraTrees + CatBoost + SVM + KNN + NaiveBayes,6,0.7657190339658655,0.3718324197656232,StratifiedKFold(5) / OOF averaging,,,BEST για n=6,mi_catboost,label_cutoff_20%
+16,1. GridSearchCV (single models),CatBoost,1,0.7655505403826444,,StratifiedKFold(5),409.0,"{'depth': 6, 'iterations': 800, 'learning_rate': 0.05}",best_score_ του GridSearchCV,mi_catboost,label_cutoff_20%
+17,3. Soft-average ensemble search (OOF),RandomForest + ExtraTrees + SVM + NaiveBayes,4,0.7652295174354269,0.36776898110467326,StratifiedKFold(5) / OOF averaging,,,,mi_catboost,label_cutoff_20%
+18,3. Soft-average ensemble search (OOF),RandomForest + ExtraTrees + CatBoost,3,0.7652130630982694,0.3579453991187194,StratifiedKFold(5) / OOF averaging,,,,mi_catboost,label_cutoff_20%
+19,3. Soft-average ensemble search (OOF),ExtraTrees + CatBoost,2,0.765085541985298,0.34793938322639273,StratifiedKFold(5) / OOF averaging,,,,mi_catboost,label_cutoff_20%
+20,3. Soft-average ensemble search (OOF),ExtraTrees + CatBoost + SVM + KNN,4,0.7650608604795617,0.3432195761490937,StratifiedKFold(5) / OOF averaging,,,,mi_catboost,label_cutoff_20%
+21,3. Soft-average ensemble search (OOF),RandomForest + ExtraTrees + NaiveBayes,3,0.7650114974680888,0.3230640029541234,StratifiedKFold(5) / OOF averaging,,,,mi_catboost,label_cutoff_20%
+22,3. Soft-average ensemble search (OOF),RandomForest + ExtraTrees + CatBoost + KNN,4,0.7647235465678309,0.3594072490476152,StratifiedKFold(5) / OOF averaging,,,,mi_catboost,label_cutoff_20%
+23,3. Soft-average ensemble search (OOF),ExtraTrees + CatBoost + NaiveBayes,3,0.7644890722633353,0.3562431249411174,StratifiedKFold(5) / OOF averaging,,,,mi_catboost,label_cutoff_20%
+24,3. Soft-average ensemble search (OOF),ExtraTrees + CatBoost + SVM + KNN + NaiveBayes,5,0.7640571459129484,0.3803442015717862,StratifiedKFold(5) / OOF averaging,,,,mi_catboost,label_cutoff_20%
+25,3. Soft-average ensemble search (OOF),RandomForest + ExtraTrees + CatBoost + NaiveBayes,4,0.7640160100700544,0.3708967712916996,StratifiedKFold(5) / OOF averaging,,,,mi_catboost,label_cutoff_20%
+26,3. Soft-average ensemble search (OOF),RandomForest + ExtraTrees + CatBoost + KNN + NaiveBayes,5,0.7636293331468509,0.37294295249716053,StratifiedKFold(5) / OOF averaging,,,,mi_catboost,label_cutoff_20%
+27,3. Soft-average ensemble search (OOF),RandomForest + ExtraTrees + SVM + KNN + NaiveBayes,5,0.763621105978272,0.3697712639062694,StratifiedKFold(5) / OOF averaging,,,,mi_catboost,label_cutoff_20%
+28,3. Soft-average ensemble search (OOF),ExtraTrees + SVM + KNN,3,0.7631727252907275,0.27390856796611235,StratifiedKFold(5) / OOF averaging,,,,mi_catboost,label_cutoff_20%
+29,3. Soft-average ensemble search (OOF),LogReg + RandomForest + ExtraTrees + CatBoost + SVM,5,0.7626996630974467,0.36967382376787655,StratifiedKFold(5) / OOF averaging,,,,mi_catboost,label_cutoff_20%
+30,3. Soft-average ensemble search (OOF),RandomForest + CatBoost + SVM,3,0.7626626408388422,0.33424675749312766,StratifiedKFold(5) / OOF averaging,,,,mi_catboost,label_cutoff_20%
+31,3. Soft-average ensemble search (OOF),RandomForest + ExtraTrees + KNN + NaiveBayes,4,0.7625927099059222,0.3584899587844692,StratifiedKFold(5) / OOF averaging,,,,mi_catboost,label_cutoff_20%
+32,3. Soft-average ensemble search (OOF),LogReg + RandomForest + ExtraTrees + CatBoost + SVM + KNN + NaiveBayes,7,0.7623335540956901,0.3677734953252477,StratifiedKFold(5) / OOF averaging,,,BEST για n=7,mi_catboost,label_cutoff_20%
+33,3. Soft-average ensemble search (OOF),LogReg + RandomForest + ExtraTrees + CatBoost + SVM + KNN,6,0.7623294405114008,0.3419486067919424,StratifiedKFold(5) / OOF averaging,,,,mi_catboost,label_cutoff_20%
+34,3. Soft-average ensemble search (OOF),ExtraTrees + KNN,2,0.7622512824099023,0.2841111815334791,StratifiedKFold(5) / OOF averaging,,,,mi_catboost,label_cutoff_20%
+35,3. Soft-average ensemble search (OOF),ExtraTrees + SVM + NaiveBayes,3,0.7622060329827187,0.35744901332645695,StratifiedKFold(5) / OOF averaging,,,,mi_catboost,label_cutoff_20%
+36,3. Soft-average ensemble search (OOF),ExtraTrees + CatBoost + KNN,3,0.7621484428026672,0.38640002939600393,StratifiedKFold(5) / OOF averaging,,,,mi_catboost,label_cutoff_20%
+37,3. Soft-average ensemble search (OOF),LogReg + RandomForest + ExtraTrees + SVM,4,0.7621031933754838,0.3796242483146319,StratifiedKFold(5) / OOF averaging,,,,mi_catboost,label_cutoff_20%
+37,3. Soft-average ensemble search (OOF),LogReg + RandomForest + ExtraTrees + CatBoost + SVM + NaiveBayes,6,0.7621031933754838,0.39146562878024116,StratifiedKFold(5) / OOF averaging,,,,mi_catboost,label_cutoff_20%
+39,3. Soft-average ensemble search (OOF),ExtraTrees + CatBoost + KNN + NaiveBayes,4,0.7620620575325898,0.36871825542083725,StratifiedKFold(5) / OOF averaging,,,,mi_catboost,label_cutoff_20%
+40,3. Soft-average ensemble search (OOF),RandomForest + CatBoost + SVM + NaiveBayes,4,0.7614121112148649,0.3858910342864233,StratifiedKFold(5) / OOF averaging,,,,mi_catboost,label_cutoff_20%
+41,3. Soft-average ensemble search (OOF),RandomForest + CatBoost + SVM + KNN,4,0.7609842984487674,0.33728952568467035,StratifiedKFold(5) / OOF averaging,,,,mi_catboost,label_cutoff_20%
+42,3. Soft-average ensemble search (OOF),LogReg + ExtraTrees + CatBoost + SVM + KNN + NaiveBayes,6,0.7605030090869076,0.3671865639695122,StratifiedKFold(5) / OOF averaging,,,,mi_catboost,label_cutoff_20%
+43,3. Soft-average ensemble search (OOF),LogReg + RandomForest + ExtraTrees + SVM + KNN,5,0.7604865547497499,0.3118174179675421,StratifiedKFold(5) / OOF averaging,,,,mi_catboost,label_cutoff_20%
+44,3. Soft-average ensemble search (OOF),RandomForest + CatBoost + SVM + KNN + NaiveBayes,5,0.7602438532766755,0.35162199906283875,StratifiedKFold(5) / OOF averaging,,,,mi_catboost,label_cutoff_20%
+45,3. Soft-average ensemble search (OOF),LogReg + ExtraTrees + CatBoost + SVM,4,0.7601780359280452,0.36572602755189404,StratifiedKFold(5) / OOF averaging,,,,mi_catboost,label_cutoff_20%
+46,3. Soft-average ensemble search (OOF),LogReg + ExtraTrees + CatBoost + SVM + KNN,5,0.760103991410836,0.3782397443679853,StratifiedKFold(5) / OOF averaging,,,,mi_catboost,label_cutoff_20%
+47,3. Soft-average ensemble search (OOF),LogReg + ExtraTrees + CatBoost + SVM + NaiveBayes,5,0.7599805838821541,0.3851960927223636,StratifiedKFold(5) / OOF averaging,,,,mi_catboost,label_cutoff_20%
+48,3. Soft-average ensemble search (OOF),ExtraTrees + SVM + KNN + NaiveBayes,4,0.7598695171063403,0.37992415406759095,StratifiedKFold(5) / OOF averaging,,,,mi_catboost,label_cutoff_20%
+49,3. Soft-average ensemble search (OOF),ExtraTrees + KNN + NaiveBayes,3,0.7596802922290279,0.3468100072512545,StratifiedKFold(5) / OOF averaging,,,,mi_catboost,label_cutoff_20%
+50,3. Soft-average ensemble search (OOF),LogReg + RandomForest + ExtraTrees + SVM + NaiveBayes,5,0.7594704994302687,0.3730212767877744,StratifiedKFold(5) / OOF averaging,,,,mi_catboost,label_cutoff_20%
+51,3. Soft-average ensemble search (OOF),LogReg + RandomForest + ExtraTrees + SVM + KNN + NaiveBayes,6,0.7590056644055665,0.3662092818389368,StratifiedKFold(5) / OOF averaging,,,,mi_catboost,label_cutoff_20%
+52,3. Soft-average ensemble search (OOF),LogReg + RandomForest + ExtraTrees + CatBoost + KNN + NaiveBayes,6,0.7589809828998302,0.3643332908750727,StratifiedKFold(5) / OOF averaging,,,,mi_catboost,label_cutoff_20%
+53,3. Soft-average ensemble search (OOF),RandomForest + SVM,2,0.7585655108866008,0.27959865403411627,StratifiedKFold(5) / OOF averaging,,,,mi_catboost,label_cutoff_20%
+54,3. Soft-average ensemble search (OOF),LogReg + RandomForest + ExtraTrees + CatBoost + NaiveBayes,5,0.7585531701337327,0.36750530631486444,StratifiedKFold(5) / OOF averaging,,,,mi_catboost,label_cutoff_20%
+55,3. Soft-average ensemble search (OOF),LogReg + RandomForest + ExtraTrees + CatBoost + KNN,5,0.7585038071222598,0.37563267163013253,StratifiedKFold(5) / OOF averaging,,,,mi_catboost,label_cutoff_20%
+56,3. Soft-average ensemble search (OOF),LogReg + RandomForest + ExtraTrees + CatBoost,4,0.7580636536032942,0.3707217745658011,StratifiedKFold(5) / OOF averaging,,,,mi_catboost,label_cutoff_20%
+57,2. Out-of-fold (single models),RandomForest,1,0.7578291792987983,0.27429669142957924,StratifiedKFold(5) / cross_val_predict,,,Average Precision = 0.8860,mi_catboost,label_cutoff_20%
+58,3. Soft-average ensemble search (OOF),LogReg + ExtraTrees + SVM,3,0.7573520035212281,0.3790624895424025,StratifiedKFold(5) / OOF averaging,,,,mi_catboost,label_cutoff_20%
+59,3. Soft-average ensemble search (OOF),LogReg + RandomForest + CatBoost + SVM + KNN + NaiveBayes,6,0.757031143946655,0.3567431044022636,StratifiedKFold(5) / OOF averaging,,,,mi_catboost,label_cutoff_20%
+60,3. Soft-average ensemble search (OOF),RandomForest + CatBoost + NaiveBayes,3,0.7569365315079989,0.3584249439637608,StratifiedKFold(5) / OOF averaging,,,,mi_catboost,label_cutoff_20%
+61,3. Soft-average ensemble search (OOF),RandomForest + CatBoost + KNN + NaiveBayes,4,0.7568995092493943,0.35573038842302884,StratifiedKFold(5) / OOF averaging,,,,mi_catboost,label_cutoff_20%
+62,3. Soft-average ensemble search (OOF),LogReg + ExtraTrees + CatBoost + KNN + NaiveBayes,5,0.756566308921953,0.37290933671417226,StratifiedKFold(5) / OOF averaging,,,,mi_catboost,label_cutoff_20%
+63,3. Soft-average ensemble search (OOF),RandomForest + CatBoost + KNN,3,0.7565334002476378,0.3488168622996917,StratifiedKFold(5) / OOF averaging,,,,mi_catboost,label_cutoff_20%
+64,3. Soft-average ensemble search (OOF),LogReg + RandomForest + CatBoost + SVM + NaiveBayes,5,0.7564716964832967,0.3763923380074585,StratifiedKFold(5) / OOF averaging,,,,mi_catboost,label_cutoff_20%
+65,3. Soft-average ensemble search (OOF),RandomForest + CatBoost,2,0.7562824716059845,0.35636225104097335,StratifiedKFold(5) / OOF averaging,,,,mi_catboost,label_cutoff_20%
+66,3. Soft-average ensemble search (OOF),LogReg + RandomForest + CatBoost + SVM + KNN,5,0.7562536765159587,0.3559460789630242,StratifiedKFold(5) / OOF averaging,,,,mi_catboost,label_cutoff_20%
+67,3. Soft-average ensemble search (OOF),RandomForest + NaiveBayes,2,0.7560562244700675,0.3258347300710633,StratifiedKFold(5) / OOF averaging,,,,mi_catboost,label_cutoff_20%
+68,3. Soft-average ensemble search (OOF),LogReg + RandomForest + CatBoost + SVM,4,0.7558546588398869,0.3577651763089433,StratifiedKFold(5) / OOF averaging,,,,mi_catboost,label_cutoff_20%
+69,3. Soft-average ensemble search (OOF),CatBoost + SVM + KNN + NaiveBayes,4,0.7557600464012308,0.3694294337228601,StratifiedKFold(5) / OOF averaging,,,,mi_catboost,label_cutoff_20%
+70,3. Soft-average ensemble search (OOF),LogReg + RandomForest + ExtraTrees,3,0.7557435920640732,0.39626507499972496,StratifiedKFold(5) / OOF averaging,,,,mi_catboost,label_cutoff_20%
+71,3. Soft-average ensemble search (OOF),RandomForest + SVM + KNN,3,0.7555831622767866,0.24878350212944705,StratifiedKFold(5) / OOF averaging,,,,mi_catboost,label_cutoff_20%
+72,3. Soft-average ensemble search (OOF),LogReg + ExtraTrees + CatBoost + NaiveBayes,4,0.7554391868266578,0.3672483591551954,StratifiedKFold(5) / OOF averaging,,,,mi_catboost,label_cutoff_20%
+73,3. Soft-average ensemble search (OOF),LogReg + ExtraTrees + SVM + KNN,4,0.7554227324895001,0.33293349107676223,StratifiedKFold(5) / OOF averaging,,,,mi_catboost,label_cutoff_20%
+74,3. Soft-average ensemble search (OOF),LogReg + RandomForest + ExtraTrees + KNN + NaiveBayes,5,0.7553733694780272,0.34824078852022083,StratifiedKFold(5) / OOF averaging,,,,mi_catboost,label_cutoff_20%
+75,3. Soft-average ensemble search (OOF),LogReg + RandomForest + ExtraTrees + NaiveBayes,4,0.7552952113765288,0.3379066287085963,StratifiedKFold(5) / OOF averaging,,,,mi_catboost,label_cutoff_20%
+76,3. Soft-average ensemble search (OOF),LogReg + ExtraTrees + CatBoost + KNN,4,0.7551964853535831,0.3703247000074702,StratifiedKFold(5) / OOF averaging,,,,mi_catboost,label_cutoff_20%
+77,3. Soft-average ensemble search (OOF),LogReg + ExtraTrees + SVM + NaiveBayes,4,0.7551183272520846,0.34891219446935556,StratifiedKFold(5) / OOF averaging,,,,mi_catboost,label_cutoff_20%
+78,3. Soft-average ensemble search (OOF),LogReg + RandomForest + ExtraTrees + KNN,4,0.7551101000835058,0.34571371714735744,StratifiedKFold(5) / OOF averaging,,,,mi_catboost,label_cutoff_20%
+79,3. Soft-average ensemble search (OOF),CatBoost + SVM + NaiveBayes,3,0.7550566234877436,0.381383715767788,StratifiedKFold(5) / OOF averaging,,,,mi_catboost,label_cutoff_20%
+80,3. Soft-average ensemble search (OOF),LogReg + ExtraTrees + SVM + KNN + NaiveBayes,5,0.754896193700457,0.35140887541502175,StratifiedKFold(5) / OOF averaging,,,,mi_catboost,label_cutoff_20%
+81,3. Soft-average ensemble search (OOF),RandomForest + SVM + NaiveBayes,3,0.7548015812618009,0.337950345583291,StratifiedKFold(5) / OOF averaging,,,,mi_catboost,label_cutoff_20%
+82,3. Soft-average ensemble search (OOF),CatBoost + SVM + KNN,3,0.7545835612944627,0.3198255529227912,StratifiedKFold(5) / OOF averaging,,,,mi_catboost,label_cutoff_20%
+83,3. Soft-average ensemble search (OOF),RandomForest + SVM + KNN + NaiveBayes,4,0.7542791560570472,0.35521638946094464,StratifiedKFold(5) / OOF averaging,,,,mi_catboost,label_cutoff_20%
+84,3. Soft-average ensemble search (OOF),LogReg + ExtraTrees + CatBoost,3,0.7540940447640242,0.36895533286831134,StratifiedKFold(5) / OOF averaging,,,,mi_catboost,label_cutoff_20%
+85,3. Soft-average ensemble search (OOF),CatBoost + SVM,2,0.7534934614577721,0.3379672053274876,StratifiedKFold(5) / OOF averaging,,,,mi_catboost,label_cutoff_20%
+86,3. Soft-average ensemble search (OOF),LogReg + CatBoost + SVM + KNN + NaiveBayes,5,0.7531232388717262,0.35956552875246406,StratifiedKFold(5) / OOF averaging,,,,mi_catboost,label_cutoff_20%
+87,3. Soft-average ensemble search (OOF),LogReg + RandomForest + CatBoost + KNN + NaiveBayes,5,0.7529504683315714,0.3502845142833837,StratifiedKFold(5) / OOF averaging,,,,mi_catboost,label_cutoff_20%
+88,4. Tuned VotingClassifier,Vote(CatBoost + XGBoost),2,0.7524058926170198,,StratifiedKFold(3),333.8,"{'cat__depth': 4, 'cat__iterations': 300, 'cat__learning_rate': 0.05, 'xgb__learning_rate': 0.15, 'xgb__max_depth': 4, 'xgb__n_estimators': 300}","soft voting, GridSearchCV",mi_catboost,label_cutoff_20%
+89,3. Soft-average ensemble search (OOF),RandomForest + KNN + NaiveBayes,3,0.7524033616210812,0.33664051262308464,StratifiedKFold(5) / OOF averaging,,,,mi_catboost,label_cutoff_20%
+90,3. Soft-average ensemble search (OOF),LogReg + RandomForest + CatBoost + NaiveBayes,4,0.7513831927173105,0.3680809570454761,StratifiedKFold(5) / OOF averaging,,,,mi_catboost,label_cutoff_20%
+91,3. Soft-average ensemble search (OOF),RandomForest + KNN,2,0.7512145357614449,0.24032975844454918,StratifiedKFold(5) / OOF averaging,,,,mi_catboost,label_cutoff_20%
+92,3. Soft-average ensemble search (OOF),LogReg + CatBoost + SVM + NaiveBayes,4,0.7511980814242873,0.383983596277103,StratifiedKFold(5) / OOF averaging,,,,mi_catboost,label_cutoff_20%
+93,3. Soft-average ensemble search (OOF),LogReg + RandomForest + SVM + KNN + NaiveBayes,5,0.7511775135028403,0.3292732983314516,StratifiedKFold(5) / OOF averaging,,,,mi_catboost,label_cutoff_20%
+94,3. Soft-average ensemble search (OOF),LogReg + CatBoost + SVM + KNN,4,0.7508731082654247,0.3543333129331621,StratifiedKFold(5) / OOF averaging,,,,mi_catboost,label_cutoff_20%
+95,3. Soft-average ensemble search (OOF),LogReg + RandomForest + CatBoost + KNN,4,0.750708564893849,0.3605746977635535,StratifiedKFold(5) / OOF averaging,,,,mi_catboost,label_cutoff_20%
+96,3. Soft-average ensemble search (OOF),LogReg + RandomForest + SVM,3,0.7505193400165366,0.3570688199611614,StratifiedKFold(5) / OOF averaging,,,,mi_catboost,label_cutoff_20%
+97,3. Soft-average ensemble search (OOF),LogReg + RandomForest + SVM + NaiveBayes,4,0.7502642977905939,0.34891219446935556,StratifiedKFold(5) / OOF averaging,,,,mi_catboost,label_cutoff_20%
+98,3. Soft-average ensemble search (OOF),LogReg + RandomForest + SVM + KNN,4,0.7501162087561757,0.31255056474556125,StratifiedKFold(5) / OOF averaging,,,,mi_catboost,label_cutoff_20%
+99,3. Soft-average ensemble search (OOF),LogReg + ExtraTrees + KNN + NaiveBayes,4,0.7499804604746253,0.3434312700263233,StratifiedKFold(5) / OOF averaging,,,,mi_catboost,label_cutoff_20%
+100,3. Soft-average ensemble search (OOF),CatBoost + KNN + NaiveBayes,3,0.7494868303598975,0.33631323770032134,StratifiedKFold(5) / OOF averaging,,,,mi_catboost,label_cutoff_20%
+101,3. Soft-average ensemble search (OOF),LogReg + CatBoost + SVM,3,0.7493963315055308,0.33891613303118834,StratifiedKFold(5) / OOF averaging,,,,mi_catboost,label_cutoff_20%
+102,3. Soft-average ensemble search (OOF),LogReg + RandomForest + CatBoost,3,0.7492605832239806,0.3651573282633058,StratifiedKFold(5) / OOF averaging,,,,mi_catboost,label_cutoff_20%
+103,3. Soft-average ensemble search (OOF),CatBoost + NaiveBayes,2,0.7491741979539032,0.33486152682736103,StratifiedKFold(5) / OOF averaging,,,,mi_catboost,label_cutoff_20%
+104,3. Soft-average ensemble search (OOF),LogReg + ExtraTrees + NaiveBayes,3,0.7487998617835678,0.3262911552058182,StratifiedKFold(5) / OOF averaging,,,,mi_catboost,label_cutoff_20%
+105,3. Soft-average ensemble search (OOF),LogReg + ExtraTrees + KNN,3,0.7476110359239315,0.331460882446405,StratifiedKFold(5) / OOF averaging,,,,mi_catboost,label_cutoff_20%
+106,3. Soft-average ensemble search (OOF),LogReg + CatBoost + KNN + NaiveBayes,4,0.7471873367421236,0.35315464364223853,StratifiedKFold(5) / OOF averaging,,,,mi_catboost,label_cutoff_20%
+107,3. Soft-average ensemble search (OOF),LogReg + ExtraTrees,2,0.7468870450889973,0.39456412873721675,StratifiedKFold(5) / OOF averaging,,,,mi_catboost,label_cutoff_20%
+108,3. Soft-average ensemble search (OOF),LogReg + RandomForest + KNN + NaiveBayes,4,0.7451840211931864,0.3311358022833667,StratifiedKFold(5) / OOF averaging,,,,mi_catboost,label_cutoff_20%
+109,3. Soft-average ensemble search (OOF),CatBoost + KNN,2,0.7451058630916877,0.34728507546884674,StratifiedKFold(5) / OOF averaging,,,,mi_catboost,label_cutoff_20%
+110,3. Soft-average ensemble search (OOF),LogReg + CatBoost + NaiveBayes,3,0.7438882421420256,0.3532669135283373,StratifiedKFold(5) / OOF averaging,,,,mi_catboost,label_cutoff_20%
+111,3. Soft-average ensemble search (OOF),LogReg + CatBoost + KNN,3,0.743337021847246,0.36776898110467326,StratifiedKFold(5) / OOF averaging,,,,mi_catboost,label_cutoff_20%
+112,2. Out-of-fold (single models),CatBoost,1,0.7424813963150512,0.3364828277520837,StratifiedKFold(5) / cross_val_predict,,,Average Precision = 0.8695,mi_catboost,label_cutoff_20%
+113,3. Soft-average ensemble search (OOF),LogReg + SVM + KNN + NaiveBayes,4,0.7420618107175325,0.33576191107489056,StratifiedKFold(5) / OOF averaging,,,,mi_catboost,label_cutoff_20%
+114,3. Soft-average ensemble search (OOF),LogReg + RandomForest + NaiveBayes,3,0.7419877662003234,0.32104595174239503,StratifiedKFold(5) / OOF averaging,,,,mi_catboost,label_cutoff_20%
+115,3. Soft-average ensemble search (OOF),LogReg + RandomForest + KNN,3,0.7399433148084922,0.33155151750735895,StratifiedKFold(5) / OOF averaging,,,,mi_catboost,label_cutoff_20%
+116,3. Soft-average ensemble search (OOF),LogReg + CatBoost,2,0.7395484107167098,0.37339060362036175,StratifiedKFold(5) / OOF averaging,,,,mi_catboost,label_cutoff_20%
+117,3. Soft-average ensemble search (OOF),SVM + KNN + NaiveBayes,3,0.7384500837114403,0.34680329460326215,StratifiedKFold(5) / OOF averaging,,,,mi_catboost,label_cutoff_20%
+118,3. Soft-average ensemble search (OOF),LogReg + SVM + NaiveBayes,3,0.738260858834128,0.3244739610975727,StratifiedKFold(5) / OOF averaging,,,,mi_catboost,label_cutoff_20%
+119,3. Soft-average ensemble search (OOF),LogReg + RandomForest,2,0.7367635141527867,0.3630075794497803,StratifiedKFold(5) / OOF averaging,,,,mi_catboost,label_cutoff_20%
+120,3. Soft-average ensemble search (OOF),LogReg + SVM + KNN,3,0.7367347190627609,0.3235340231823149,StratifiedKFold(5) / OOF averaging,,,,mi_catboost,label_cutoff_20%
+121,3. Soft-average ensemble search (OOF),LogReg + SVM,2,0.733476760305557,0.3519200786889901,StratifiedKFold(5) / OOF averaging,,,,mi_catboost,label_cutoff_20%
+122,3. Soft-average ensemble search (OOF),SVM + KNN,2,0.7300090087495937,0.18242543644875736,StratifiedKFold(5) / OOF averaging,,,,mi_catboost,label_cutoff_20%
+123,3. Soft-average ensemble search (OOF),LogReg + KNN + NaiveBayes,3,0.72989794197378,0.317174883195269,StratifiedKFold(5) / OOF averaging,,,,mi_catboost,label_cutoff_20%
+124,3. Soft-average ensemble search (OOF),SVM + NaiveBayes,2,0.72688679827394,0.3262911552058182,StratifiedKFold(5) / OOF averaging,,,,mi_catboost,label_cutoff_20%
+125,3. Soft-average ensemble search (OOF),KNN + NaiveBayes,2,0.7232709576835584,0.3296260203566066,StratifiedKFold(5) / OOF averaging,,,,mi_catboost,label_cutoff_20%
+126,3. Soft-average ensemble search (OOF),LogReg + NaiveBayes,2,0.7197785246218588,0.3250091939798923,StratifiedKFold(5) / OOF averaging,,,,mi_catboost,label_cutoff_20%
+127,3. Soft-average ensemble search (OOF),LogReg + KNN,2,0.7164424077631563,0.29318859804379194,StratifiedKFold(5) / OOF averaging,,,,mi_catboost,label_cutoff_20%
+128,2. Out-of-fold (single models),SVM,1,0.7151877645548897,0.23381690811553768,StratifiedKFold(5) / cross_val_predict,,,Average Precision = 0.8584,mi_catboost,label_cutoff_20%
+129,2. Out-of-fold (single models),NaiveBayes,1,0.7047598283812635,0.32540772976545157,StratifiedKFold(5) / cross_val_predict,,,Average Precision = 0.8453,mi_catboost,label_cutoff_20%
+130,1. GridSearchCV (single models),Logistic Regression,1,0.7033836354622446,,StratifiedKFold(5),38.0,"{'C': 0.01, 'penalty': 'l2', 'solver': 'saga'}",best_score_ του GridSearchCV,mi_catboost,label_cutoff_20%
+131,2. Out-of-fold (single models),LogReg,1,0.7008190146320193,0.23626483563453107,StratifiedKFold(5) / cross_val_predict,,,Average Precision = 0.8510,mi_catboost,label_cutoff_20%
+132,2. Out-of-fold (single models),KNN,1,0.6969810404900102,0.11629331945736861,StratifiedKFold(5) / cross_val_predict,,,Average Precision = 0.8626,mi_catboost,label_cutoff_20%

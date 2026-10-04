@@ -1,0 +1,7 @@
+﻿Βήμα,Υλοποίηση,Ρύθμιση
+Ανάγνωση δομής,RDKit MolFromSmiles,από SMILES
+Προσθήκη υδρογόνων,RDKit AddHs,ρητά άτομα υδρογόνου
+Παραγωγή διαμόρφωσης,RDKit EmbedMolecule (ETKDGv3),"randomSeed = 42, μία διαμόρφωση ανά μόριο"
+Βελτιστοποίηση γεωμετρίας,RDKit MMFFOptimizeMolecule,σε αποτυχία διατηρείται η αρχική γεωμετρία
+Υπολογισμός περιγραφέων,Mordred Calculator(descriptors),"ignore_3D = False, 1826 περιγραφείς (1613 2D + 213 3D)"
+Διαχείριση σφαλμάτων,pandas to_numeric(errors='coerce'),τιμές σφάλματος σε ελλιπείς τιμές (NaN)

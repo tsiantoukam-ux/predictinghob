@@ -1,0 +1,19 @@
+﻿Label,Dataset,Model,Rule,N,Threshold,MCC,ROC-AUC,Balanced Acc,Accuracy,F1,Precision,Sensitivity,Specificity,TP,FP,TN,FN
+label_cutoff_50%,Training (OOF CV),ExtraTrees + CatBoost (soft avg),0.50 (σταθερό),1142,0.5,0.3713,0.7667,0.6847,0.6891,0.7203,0.7052,0.7359,0.6334,457,191,330,164
+label_cutoff_50%,Training (OOF CV),ExtraTrees + CatBoost (soft avg),CV max MCC,1142,0.55,0.3936,0.7667,0.6973,0.6979,0.717,0.7308,0.7037,0.691,437,161,360,184
+label_cutoff_50%,Training (OOF CV),ExtraTrees + CatBoost (soft avg),CV Youden's J,1142,0.549,0.3969,0.7667,0.699,0.6996,0.7191,0.7317,0.7069,0.691,439,161,360,182
+label_cutoff_50%,Test set 1,ExtraTrees + CatBoost (soft avg),0.50 (σταθερό),290,0.5,0.5076,0.8136,0.7553,0.7586,0.7892,0.8037,0.7751,0.7355,131,32,89,38
+label_cutoff_50%,Test set 1,ExtraTrees + CatBoost (soft avg),CV max MCC,290,0.55,0.518,0.8136,0.7624,0.7586,0.7812,0.8278,0.7396,0.7851,125,26,95,44
+label_cutoff_50%,Test set 1,ExtraTrees + CatBoost (soft avg),CV Youden's J,290,0.549,0.518,0.8136,0.7624,0.7586,0.7812,0.8278,0.7396,0.7851,125,26,95,44
+label_cutoff_50%,Test set 2,ExtraTrees + CatBoost (soft avg),0.50 (σταθερό),140,0.5,0.6102,0.9108,0.8009,0.8214,0.8619,0.8478,0.8764,0.7255,78,14,37,11
+label_cutoff_50%,Test set 2,ExtraTrees + CatBoost (soft avg),CV max MCC,140,0.55,0.6199,0.9108,0.8135,0.8214,0.8571,0.8721,0.8427,0.7843,75,11,40,14
+label_cutoff_50%,Test set 2,ExtraTrees + CatBoost (soft avg),CV Youden's J,140,0.549,0.6199,0.9108,0.8135,0.8214,0.8571,0.8721,0.8427,0.7843,75,11,40,14
+label_cutoff_20%,Training (OOF CV),ExtraTrees,0.50 (σταθερό),1142,0.5,0.4049,0.7774,0.6504,0.8056,0.8812,0.8157,0.9581,0.3428,823,186,97,36
+label_cutoff_20%,Training (OOF CV),ExtraTrees,CV max MCC,1142,0.53,0.4313,0.7774,0.6687,0.8117,0.8838,0.8246,0.9523,0.3852,818,174,109,41
+label_cutoff_20%,Training (OOF CV),ExtraTrees,CV Youden's J,1142,0.742,0.3691,0.7774,0.7122,0.6883,0.7623,0.8936,0.6647,0.7597,571,68,215,288
+label_cutoff_20%,Test set 1,ExtraTrees,0.50 (σταθερό),287,0.5,0.3413,0.8348,0.625,0.784,0.8675,0.7992,0.9486,0.3014,203,51,22,11
+label_cutoff_20%,Test set 1,ExtraTrees,CV max MCC,287,0.53,0.3483,0.8348,0.634,0.784,0.8664,0.804,0.9393,0.3288,201,49,24,13
+label_cutoff_20%,Test set 1,ExtraTrees,CV Youden's J,287,0.742,0.4125,0.8348,0.7359,0.7003,0.7676,0.9103,0.6636,0.8082,142,14,59,72
+label_cutoff_20%,Test set 2,ExtraTrees,0.50 (σταθερό),132,0.5,0.4472,0.978,0.8606,0.9167,0.9551,0.9915,0.9213,0.8,117,1,4,10
+label_cutoff_20%,Test set 2,ExtraTrees,CV max MCC,132,0.53,0.4291,0.978,0.8567,0.9091,0.9508,0.9915,0.9134,0.8,116,1,4,11
+label_cutoff_20%,Test set 2,ExtraTrees,CV Youden's J,132,0.742,0.3508,0.978,0.8937,0.7955,0.8811,1.0,0.7874,1.0,100,0,5,27

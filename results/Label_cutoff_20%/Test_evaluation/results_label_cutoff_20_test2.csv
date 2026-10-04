@@ -1,0 +1,2 @@
+﻿Label,Test set,Model,N features,N molecules,Threshold,Threshold rule,MCC,ROC-AUC,Balanced Acc,Accuracy,F1,Precision,Sensitivity (Recall),Specificity,TP,FP,TN,FN
+label_cutoff_20%,Test set 2,ExtraTrees,232,132,0.713,cv_youden,0.3659,0.9811,0.9016,0.8106,0.8908,1.0,0.8031,1.0,102,0,5,25

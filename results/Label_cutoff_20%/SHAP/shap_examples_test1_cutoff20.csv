@@ -1,0 +1,5 @@
+﻿περίπτωση,Name,SMILES,πραγματική,proba_High,top-3 descriptors
+σωστό_High (TP),leflunomide,Cc1oncc1C(=O)Nc1ccc(C(F)(F)F)cc1,High,0.956,"BCUTv-1l (+0.015), MID_X (+0.014), BCUTpe-1h (+0.012)"
+σωστό_Low (TN),desmopressin,N=C(O)CCC1N=C(O)C(Cc2ccccc2)N=C(O)C(Cc2ccc(O)cc2)N=C(O)CCSSCC(C(=O)N2CCCC2C(O)=NC(CCCNC(=N)N)C(O)=NCC(=N)O)N=C(O)C(CC(=N)O)N=C1O,Low,0.1,"ATSC1se (-0.019), DPSA3 (-0.017), WNSA4 (-0.017)"
+λάθος_High (FP),azosemide,NS(=O)(=O)c1cc(-c2nn[nH]n2)c(NCc2cccs2)cc1Cl,Low,0.839,"CIC0 (+0.009), MID_X (+0.008), FNSA1 (+0.006)"
+λάθος_Low (FN),idarubicin,CC(=O)C1(O)Cc2c(O)c3c(c(O)c2C(OC2CC(N)C(O)C(C)O2)C1)C(=O)c1ccccc1C3=O,High,0.288,"DPSA3 (-0.012), MDEO-11 (-0.011), nO (-0.010)"

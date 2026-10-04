@@ -1,0 +1,14 @@
+{
+  "label_case": "label_cutoff_20%",
+  "seeds": [
+    42,
+    7,
+    123
+  ],
+  "n_features": 1672,
+  "n_train": 1142,
+  "n_hidden": 1,
+  "neurons": 64,
+  "dropout": 0.2,
+  "learning_rate": 0.0003
+}

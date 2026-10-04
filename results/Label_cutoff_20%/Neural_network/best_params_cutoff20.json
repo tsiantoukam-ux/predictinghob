@@ -1,0 +1,9 @@
+{
+  "label_case": "label_cutoff_20%",
+  "n_hidden": 1,
+  "neurons": 64,
+  "dropout": 0.2,
+  "cv_roc_auc": 0.7530409671859382,
+  "n_configs": 27,
+  "learning_rate": 0.0003
+}

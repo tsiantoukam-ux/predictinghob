@@ -1,0 +1,13 @@
+﻿Label,Model,Σύνολο,Feature set,N features,N molecules,Threshold (Youden),ROC-AUC,MCC,Balanced Acc,Accuracy,F1,Sensitivity,Specificity,TP,FP,TN,FN
+label_cutoff_20%,ExtraTrees,CV (1142),Elastic Net,346,1142,0.654,0.7706,0.4062,0.7041,0.7776,0.8518,0.8498,0.5583,730,125,158,129
+label_cutoff_20%,ExtraTrees,CV (1142),MI ∩ CatBoost,232,1142,0.713,0.7746,0.3852,0.7159,0.7242,0.7997,0.7322,0.6996,629,85,198,230
+label_cutoff_20%,ExtraTrees,Test set 1,Elastic Net,346,287,0.654,0.8277,0.5064,0.7587,0.8084,0.87,0.8598,0.6575,184,25,48,30
+label_cutoff_20%,ExtraTrees,Test set 1,MI ∩ CatBoost,232,287,0.713,0.8301,0.4562,0.7551,0.7491,0.8154,0.743,0.7671,159,17,56,55
+label_cutoff_20%,ExtraTrees,Test set 2,Elastic Net,346,132,0.654,0.9795,0.4562,0.937,0.8788,0.9328,0.874,1.0,111,0,5,16
+label_cutoff_20%,ExtraTrees,Test set 2,MI ∩ CatBoost,232,132,0.713,0.9811,0.3659,0.9016,0.8106,0.8908,0.8031,1.0,102,0,5,25
+label_cutoff_50%,ExtraTrees + CatBoost (soft average),CV (1142),Elastic Net,318,1142,0.553,0.7557,0.4044,0.7028,0.7032,0.7214,0.7069,0.6987,439,157,364,182
+label_cutoff_50%,ExtraTrees + CatBoost (soft average),CV (1142),MI ∩ CatBoost,243,1142,0.572,0.7701,0.3985,0.7,0.6988,0.7124,0.686,0.714,426,149,372,195
+label_cutoff_50%,ExtraTrees + CatBoost (soft average),Test set 1,Elastic Net,318,290,0.553,0.8312,0.5303,0.7689,0.7621,0.781,0.7278,0.8099,123,23,98,46
+label_cutoff_50%,ExtraTrees + CatBoost (soft average),Test set 1,MI ∩ CatBoost,243,290,0.572,0.8202,0.4781,0.7423,0.7379,0.761,0.716,0.7686,121,28,93,48
+label_cutoff_50%,ExtraTrees + CatBoost (soft average),Test set 2,Elastic Net,318,140,0.553,0.9262,0.6504,0.8289,0.8357,0.8686,0.8539,0.8039,76,10,41,13
+label_cutoff_50%,ExtraTrees + CatBoost (soft average),Test set 2,MI ∩ CatBoost,243,140,0.572,0.8947,0.6289,0.8219,0.8214,0.8538,0.8202,0.8235,73,9,42,16

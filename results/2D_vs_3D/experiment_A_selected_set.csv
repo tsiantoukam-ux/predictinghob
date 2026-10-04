@@ -1,0 +1,7 @@
+﻿Label,Model,Σύνολο περιγραφέων,N features,ROC-AUC,MCC,Balanced Acc,F1,Threshold (Youden)
+label_cutoff_50%,ExtraTrees + CatBoost (soft average),Μόνο 2D,195,0.7733,0.4179,0.7082,0.7391,0.516
+label_cutoff_50%,ExtraTrees + CatBoost (soft average),Μόνο 3D,48,0.7262,0.3412,0.6712,0.6797,0.55
+label_cutoff_50%,ExtraTrees + CatBoost (soft average),2D + 3D (όλοι),243,0.7701,0.3985,0.7,0.7124,0.572
+label_cutoff_20%,ExtraTrees,Μόνο 2D,183,0.7784,0.3749,0.7113,0.7918,0.721
+label_cutoff_20%,ExtraTrees,Μόνο 3D,49,0.7379,0.3522,0.6922,0.8081,0.677
+label_cutoff_20%,ExtraTrees,2D + 3D (όλοι),232,0.7746,0.3852,0.7159,0.7997,0.713

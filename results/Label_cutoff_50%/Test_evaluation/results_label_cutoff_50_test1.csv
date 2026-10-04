@@ -1,0 +1,2 @@
+﻿Label,Test set,Model,N features,N molecules,Threshold,Threshold rule,MCC,ROC-AUC,Balanced Acc,Accuracy,F1,Precision,Sensitivity (Recall),Specificity,TP,FP,TN,FN
+label_cutoff_50%,Test set 1,ExtraTrees + CatBoost (soft average),243,290,0.572,cv_youden,0.4781,0.8202,0.7423,0.7379,0.761,0.8121,0.716,0.7686,121,28,93,48

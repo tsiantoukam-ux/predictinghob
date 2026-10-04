@@ -1,0 +1,5 @@
+﻿περίπτωση,Name,SMILES,πραγματική,proba_High,top-3 descriptors
+σωστό_High (TP),suprofen,CC(C(=O)O)c1ccc(C(=O)c2ccccc2)s1,High,0.956,"Mor30p (+0.010), GATS2m (+0.010), VSA_EState3 (+0.010)"
+σωστό_Low (TN),kanamycin,CC(O)=NCC1OC(OC2C(N)CC(N)C(OC3OC(CO)C(O)C(N)C3O)C2O)C(O)C(O)C1O,Low,0.029,"GGI9 (-0.030), VSA_EState3 (-0.028), AATSC2s (-0.019)"
+λάθος_High (FP),chlortetracycline,CN(C)C1C(O)=C(C(=N)O)C(=O)C2(O)C(O)=C3C(=O)c4c(O)ccc(Cl)c4C(C)(O)C3CC12,Low,0.9,"AATSC4s (+0.016), GATS2m (+0.015), GGI9 (-0.014)"
+λάθος_Low (FN),cefixime,C=CC1=C(C(=O)O)N2C(=O)C(NC(=O)C(=NC(=O)CC(=O)O)c3c[nH]c(=N)s3)C2SC1,High,0.117,"Mor24m (-0.039), C1SP2 (-0.029), VSA_EState3 (-0.028)"
