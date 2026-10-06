@@ -1,0 +1,228 @@
+<!doctype html><html lang='en'><head><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1'><title>HOB charts dashboard</title><style>
+:root{color-scheme:light;--bg:#f5f5f2;--surface:#fcfcfb;--ink:#0b0b0b;--ink2:#52514e;--muted:#8a8984;
+--line:#e3e2dc;--grid:#ecebe6;--s1:#2a78d6;--s2:#eb6834;--s3:#1baf7a;--accent:#2a78d6;--chip:#eeeeea}
+@media (prefers-color-scheme:dark){:root{color-scheme:dark;--bg:#111110;--surface:#1a1a19;--ink:#ffffff;
+--ink2:#c3c2b7;--muted:#8f8e86;--line:#30302d;--grid:#262624;--s1:#3987e5;--s2:#d95926;--s3:#199e70;
+--accent:#3987e5;--chip:#262624}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.5 "Segoe UI",system-ui,-apple-system,Roboto,sans-serif}
+.wrap{max-width:1180px;margin:0 auto;padding:28px 20px 56px}
+header.top{display:flex;flex-wrap:wrap;gap:16px;align-items:flex-end;justify-content:space-between;margin-bottom:22px}
+.eyebrow{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);font-weight:600}
+h1{font:600 26px/1.2 Georgia,"Times New Roman",serif;margin:6px 0 4px;max-width:820px}
+.byline{color:var(--ink2);font-size:14px}
+h2{font:600 19px/1.3 Georgia,serif;margin:38px 0 4px}
+.finding{color:var(--ink2);max-width:860px;margin:0 0 14px}
+.lede{color:var(--ink2);max-width:900px;margin:0 0 20px;font-size:15px}
+.take{color:var(--ink);font-size:13.5px;margin:10px 0 2px;padding-left:10px;border-left:2px solid var(--s2)}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,440px),1fr));gap:16px;align-items:start}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:16px 16px 12px;min-width:0}
+.card h3{font-size:15px;font-weight:600;margin:0}
+.card .sub{color:var(--ink2);font-size:13px;margin:2px 0 8px}
+.card .note{color:var(--muted);font-size:12px;margin-top:6px}
+.legend{display:flex;flex-wrap:wrap;gap:6px 16px;font-size:13px;color:var(--ink2);margin:0 0 4px}
+.legend i{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:6px}
+.legend .ln i{height:3px;border-radius:2px;vertical-align:middle}
+svg{display:block;width:100%;height:auto;overflow:visible}
+svg text{font:12px "Segoe UI",system-ui,sans-serif;fill:var(--ink2)}
+svg .val{fill:var(--ink);font-weight:600}
+svg .cat{fill:var(--ink)}
+svg .tick{fill:var(--muted);font-size:11px}
+svg .onbar{fill:#fff;font-weight:600}
+.s1{fill:var(--s1)}.s2{fill:var(--s2)}.s3{fill:var(--s3)}
+.l1{stroke:var(--s1)}.l2{stroke:var(--s2)}.l3{stroke:var(--s3)}
+.b1{background:var(--s1)}.b2{background:var(--s2)}.b3{background:var(--s3)}
+.gridl{stroke:var(--grid);stroke-width:1}.axis{stroke:var(--line);stroke-width:1}
+.ref{stroke:var(--muted);stroke-width:1;stroke-dasharray:4 4}
+.hit{fill:transparent;cursor:default}.hot{opacity:.78}
+.seg{display:inline-flex;background:var(--chip);border-radius:9px;padding:3px;gap:2px}
+.seg button{border:0;background:transparent;color:var(--ink2);font:inherit;font-size:13px;padding:5px 12px;border-radius:7px;cursor:pointer}
+.seg button[aria-pressed=true]{background:var(--surface);color:var(--ink);font-weight:600;box-shadow:0 0 0 1px var(--line)}
+.ctrl{display:flex;align-items:center;gap:10px;font-size:13px;color:var(--ink2)}
+.tools{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-top:6px}
+.dbtn{border:0;background:none;color:var(--accent);font:inherit;font-size:12px;cursor:pointer;padding:2px 0}
+table{border-collapse:collapse;width:100%;font-size:13px;font-variant-numeric:tabular-nums}
+th,td{padding:6px 8px;border-bottom:1px solid var(--line);text-align:right;white-space:nowrap}
+th:first-child,td:first-child{text-align:left;white-space:normal}
+th{color:var(--ink2);font-weight:600}
+.tw{overflow-x:auto}
+.dt{display:none;margin-top:8px}.dt.open{display:block}
+#tip{position:fixed;pointer-events:none;background:var(--ink);color:var(--surface);font-size:12px;line-height:1.45;
+padding:7px 9px;border-radius:7px;opacity:0;transition:opacity .08s;z-index:9;max-width:260px}
+#tip b{font-weight:600}
+footer{margin-top:36px;color:var(--muted);font-size:12px;border-top:1px solid var(--line);padding-top:12px}
+@media print{.dbtn,#tip{display:none}.card{break-inside:avoid}}
+
+:root{color-scheme:dark;--bg:#0a1c2e;--surface:#12304a;--ink:#faf6ee;--ink2:#a9c0c8;--muted:#86a2ad;
+--line:#2b5066;--grid:#1e4259;--s1:#3fbdb3;--s2:#e5b25c;--s3:#cb704c;--accent:#5ed6cd;--chip:#0e2a40}
+body{background:linear-gradient(180deg,#0a1c2e 0%,#103a4e 100%) fixed;min-height:100vh}
+.card{border-radius:16px}
+.card h3{color:#f0c88c;text-transform:uppercase;letter-spacing:.04em;font-size:14px}
+.card h3::before{content:"";display:inline-block;width:4px;height:13px;background:#f0c88c;margin-right:9px;vertical-align:-1px}
+.seg button[aria-pressed=true]{background:#5ed6cd;color:#0a1c2e;box-shadow:none}
+#tip{background:#faf6ee;color:#0a1c2e}
+svg .onbar{fill:#0a1c2e;font-weight:600}
+</style></head><body>
+<div class="wrap">
+<header class="top"><div><div class="eyebrow">MSc thesis · charts dashboard</div>
+<h1>Prediction of Human Oral Bioavailability Using Machine and Deep Learning and Model Interpretation with SHAP Values</h1>
+<div class="byline">Marina Tsiantouka · MSc Artificial Intelligence, University of Essex</div></div>
+<div class="ctrl"><span>HOB threshold</span><div class="seg" id="cut"><button data-c="50">50%</button><button data-c="20">20%</button></div></div></header>
+<p class="lede">Human oral bioavailability (HOB) is the fraction of an oral dose that reaches the bloodstream unchanged. This dashboard
+shows the main results of the thesis: molecules are classified as High or Low HOB from Mordred molecular descriptors, models are chosen
+by 5-fold cross-validation on 1,142 training molecules, and the final models are tested once on two external test sets. The switch on
+the right changes the HOB threshold (50% or 20%) that separates High from Low.</p>
+<div class="grid" id="g"></div>
+<footer>Hover a chart for exact values; “Show data” opens the table behind each chart. Data: HobPre dataset (Wei et al., 2022). All values come from the thesis result files.</footer>
+</div>
+<script>
+const D={"final": {"50": {"tree": {"t1": {"auc": 0.8202, "mcc": 0.4781, "ba": 0.7423, "acc": 0.7379, "f1": 0.761, "prec": 0.8121, "sens": 0.716, "spec": 0.7686, "TP": 121, "FP": 28, "TN": 93, "FN": 48, "n": 290, "thr": 0.572, "high": 169, "low": 121}, "name": "ExtraTrees + CatBoost", "nfeat": 243, "t2": {"auc": 0.8947, "mcc": 0.6289, "ba": 0.8219, "acc": 0.8214, "f1": 0.8538, "prec": 0.8902, "sens": 0.8202, "spec": 0.8235, "TP": 73, "FP": 9, "TN": 42, "FN": 16, "n": 140, "thr": 0.572, "high": 89, "low": 51}}, "nn": {"t1": {"auc": 0.7936, "mcc": 0.4523, "ba": 0.7293, "acc": 0.7241, "f1": 0.7468, "prec": 0.8027, "sens": 0.6982, "spec": 0.7603, "TP": 118, "FP": 29, "TN": 92, "FN": 51, "n": 290, "thr": 0.5, "high": 169, "low": 121}, "t2": {"auc": 0.8793, "mcc": 0.5811, "ba": 0.7967, "acc": 0.8, "f1": 0.8372, "prec": 0.8675, "sens": 0.809, "spec": 0.7843, "TP": 72, "FP": 11, "TN": 40, "FN": 17, "n": 140, "thr": 0.5, "high": 89, "low": 51}, "name": "MLP 1×256, dropout 0.5"}}, "20": {"tree": {"t1": {"auc": 0.8301, "mcc": 0.4562, "ba": 0.7551, "acc": 0.7491, "f1": 0.8154, "prec": 0.9034, "sens": 0.743, "spec": 0.7671, "TP": 159, "FP": 17, "TN": 56, "FN": 55, "n": 287, "thr": 0.713, "high": 214, "low": 73}, "name": "ExtraTrees", "nfeat": 232, "t2": {"auc": 0.9811, "mcc": 0.3659, "ba": 0.9016, "acc": 0.8106, "f1": 0.8908, "prec": 1.0, "sens": 0.8031, "spec": 1.0, "TP": 102, "FP": 0, "TN": 5, "FN": 25, "n": 132, "thr": 0.713, "high": 127, "low": 5}}, "nn": {"t1": {"auc": 0.7792, "mcc": 0.3687, "ba": 0.6721, "acc": 0.7735, "f1": 0.8526, "prec": 0.8282, "sens": 0.8785, "spec": 0.4658, "TP": 188, "FP": 39, "TN": 34, "FN": 26, "n": 287, "thr": 0.5, "high": 214, "low": 73}, "t2": {"auc": 0.9433, "mcc": 0.3708, "ba": 0.8409, "acc": 0.8788, "f1": 0.9333, "prec": 0.9912, "sens": 0.8819, "spec": 0.8, "TP": 112, "FP": 1, "TN": 4, "FN": 15, "n": 132, "thr": 0.5, "high": 127, "low": 5}, "name": "MLP 1×64, dropout 0.2"}}}, "cv": {"50": [{"model": "ExtraTrees", "auc": 0.7696, "mcc": 0.3913}, {"model": "Random Forest", "auc": 0.7595, "mcc": 0.3771}, {"model": "CatBoost", "auc": 0.7569, "mcc": 0.3814}, {"model": "Logistic Regression", "auc": 0.703, "mcc": 0.3029}, {"model": "SVM (RBF)", "auc": 0.695, "mcc": 0.2698}, {"model": "k-NN", "auc": 0.6916, "mcc": 0.278}, {"model": "Gaussian Naive Bayes", "auc": 0.6846, "mcc": 0.2506}], "20": [{"model": "ExtraTrees", "auc": 0.7746, "mcc": 0.4015}, {"model": "Random Forest", "auc": 0.7578, "mcc": 0.2743}, {"model": "CatBoost", "auc": 0.7425, "mcc": 0.3365}, {"model": "SVM (RBF)", "auc": 0.7152, "mcc": 0.2338}, {"model": "Gaussian Naive Bayes", "auc": 0.7048, "mcc": 0.3254}, {"model": "Logistic Regression", "auc": 0.7008, "mcc": 0.2363}, {"model": "k-NN", "auc": 0.697, "mcc": 0.1163}]}, "fs": {"50": [{"stage": "5-fold CV", "mi": 0.7732, "en": 0.7601, "n_mi": 243, "n_en": 318}, {"stage": "Test set 1", "mi": 0.8215, "en": 0.8293}, {"stage": "Test set 2", "mi": 0.9174, "en": 0.9258}], "20": [{"stage": "5-fold CV", "mi": 0.7774, "en": 0.7706, "n_mi": 232, "n_en": 346}, {"stage": "Test set 1", "mi": 0.8348, "en": 0.8277}, {"stage": "Test set 2", "mi": 0.978, "en": 0.9795}]}, "d23": {"50": {"A": [{"set": "2D only", "n": 195, "auc": 0.7733, "mcc": 0.4179}, {"set": "3D only", "n": 48, "auc": 0.7262, "mcc": 0.3412}, {"set": "2D + 3D", "n": 243, "auc": 0.7701, "mcc": 0.3985}], "B": [{"set": "Top-120 2D", "n": 120, "auc": 0.7588, "mcc": 0.3981}, {"set": "Top-120 3D", "n": 120, "auc": 0.7267, "mcc": 0.3358}, {"set": "Top-120 2D + Top-120 3D", "n": 240, "auc": 0.7485, "mcc": 0.3729}]}, "20": {"A": [{"set": "2D only", "n": 183, "auc": 0.7784, "mcc": 0.3749}, {"set": "3D only", "n": 49, "auc": 0.7379, "mcc": 0.3522}, {"set": "2D + 3D", "n": 232, "auc": 0.7746, "mcc": 0.3852}], "B": [{"set": "Top-118 2D", "n": 118, "auc": 0.7754, "mcc": 0.3668}, {"set": "Top-118 3D", "n": 118, "auc": 0.7271, "mcc": 0.329}, {"set": "Top-118 2D + Top-118 3D", "n": 236, "auc": 0.7686, "mcc": 0.3757}]}}, "shap": {"50": [{"name": "VSA_EState3", "val": 0.010494, "type": "2D", "dir": "Low"}, {"name": "MID_X", "val": 0.009708, "type": "2D", "dir": "High"}, {"name": "GATS2m", "val": 0.009042, "type": "2D", "dir": "Low"}, {"name": "GGI9", "val": 0.008539, "type": "2D", "dir": "Low"}, {"name": "Mor24m", "val": 0.008536, "type": "3D", "dir": "High"}, {"name": "GATS1m", "val": 0.008523, "type": "2D", "dir": "Low"}, {"name": "GATS1se", "val": 0.008282, "type": "2D", "dir": "Low"}, {"name": "Mor05m", "val": 0.008176, "type": "3D", "dir": "High"}, {"name": "EState_VSA8", "val": 0.007941, "type": "2D", "dir": "Low"}, {"name": "Mor21m", "val": 0.007877, "type": "3D", "dir": "High"}, {"name": "nG12FHRing", "val": 0.007688, "type": "2D", "dir": "Low"}, {"name": "SMR_VSA5", "val": 0.006773, "type": "2D", "dir": "Low"}, {"name": "BCUTi-1h", "val": 0.00662, "type": "2D", "dir": "High"}, {"name": "AATSC7i", "val": 0.006486, "type": "2D", "dir": "Low"}, {"name": "Mor12", "val": 0.006468, "type": "3D", "dir": "High"}], "20": [{"name": "MINssssN", "val": 0.005366, "type": "2D", "dir": "Low"}, {"name": "CIC0", "val": 0.005174, "type": "2D", "dir": "Low"}, {"name": "DPSA3", "val": 0.005156, "type": "3D", "dir": "Low"}, {"name": "WPSA3", "val": 0.004849, "type": "3D", "dir": "Low"}, {"name": "PPSA4", "val": 0.004789, "type": "3D", "dir": "Low"}, {"name": "MID_X", "val": 0.004766, "type": "2D", "dir": "High"}, {"name": "NssssN", "val": 0.00475, "type": "2D", "dir": "Low"}, {"name": "WNSA3", "val": 0.004722, "type": "3D", "dir": "High"}, {"name": "ATSC1se", "val": 0.00423, "type": "2D", "dir": "High"}, {"name": "Xc-5d", "val": 0.003893, "type": "2D", "dir": "Low"}, {"name": "DPSA4", "val": 0.003889, "type": "3D", "dir": "Low"}, {"name": "ATSC0c", "val": 0.003882, "type": "2D", "dir": "Low"}, {"name": "WPSA2", "val": 0.003881, "type": "3D", "dir": "Low"}, {"name": "VR3_A", "val": 0.003815, "type": "2D", "dir": "Low"}, {"name": "TPSA", "val": 0.003727, "type": "3D", "dir": "Low"}]}, "share": {"50": {"tree": {"n2": 195, "n3": 48, "desc3": 19.7531, "shap3": 22.4509, "top20_3d": 4}, "nn": {"n2": 1459, "n3": 213, "desc3": 12.7392, "shap3": 14.1412, "top20_3d": 0, "source": "shap_2d_vs_3d_cutoff50.csv"}}, "20": {"tree": {"n2": 183, "n3": 49, "desc3": 21.1207, "shap3": 24.36, "top20_3d": 8}, "nn": {"n2": 1459, "n3": 213, "desc3": 12.7392, "shap3": 19.0645, "top20_3d": 4, "source": "shap_2d_vs_3d_test1_cutoff20.csv"}}}, "roc": {"50": {"t1": {"tree": {"auc": 0.8202, "pts": [[0.0, 0.0], [0.0, 0.0059], [0.0, 0.142], [0.0083, 0.142], [0.0083, 0.1479], [0.0165, 0.1479], [0.0165, 0.1893], [0.0248, 0.1893], [0.0248, 0.2071], [0.0331, 0.2071], [0.0331, 0.2663], [0.0413, 0.2663], [0.0413, 0.3136], [0.0496, 0.3136], [0.0496, 0.3669], [0.0579, 0.3669], [0.0579, 0.4024], [0.0661, 0.4024], [0.0661, 0.4615], [0.0826, 0.4615], [0.0826, 0.4675], [0.0909, 0.4675], [0.0909, 0.4911], [0.0992, 0.4911], [0.0992, 0.5089], [0.1074, 0.5089], [0.1074, 0.5207], [0.1157, 0.5207], [0.1157, 0.5266], [0.124, 0.5266], [0.124, 0.5325], [0.1322, 0.5325], [0.1322, 0.5444], [0.1405, 0.5444], [0.1405, 0.6154], [0.1488, 0.6154], [0.1488, 0.6331], [0.157, 0.6331], [0.157, 0.645], [0.1653, 0.645], [0.1653, 0.6686], [0.1736, 0.6686], [0.1736, 0.6805], [0.1818, 0.6805], [0.1818, 0.6864], [0.1901, 0.6864], [0.1901, 0.6982], [0.2149, 0.6982], [0.2149, 0.716], [0.2314, 0.716], [0.2314, 0.7278], [0.2397, 0.7278], [0.2397, 0.7337], [0.2479, 0.7337], [0.2479, 0.7396], [0.2562, 0.7396], [0.2562, 0.7456], [0.2645, 0.7456], [0.2645, 0.7515], [0.2727, 0.7515], [0.2727, 0.787], [0.281, 0.787], [0.281, 0.7988], [0.314, 0.7988], [0.314, 0.8107], [0.3223, 0.8107], [0.3223, 0.8166], [0.3471, 0.8166], [0.3471, 0.8343], [0.3636, 0.8343], [0.3636, 0.8402], [0.3719, 0.8402], [0.3719, 0.8462], [0.3802, 0.8462], [0.3802, 0.8521], [0.4132, 0.8521], [0.4132, 0.858], [0.438, 0.858], [0.438, 0.8639], [0.4463, 0.8639], [0.4463, 0.8698], [0.4711, 0.8698], [0.4711, 0.8757], [0.4793, 0.8757], [0.4793, 0.8876], [0.4876, 0.8876], [0.4876, 0.8935], [0.5207, 0.8935], [0.5207, 0.9053], [0.5537, 0.9053], [0.5537, 0.9231], [0.5785, 0.9231], [0.5785, 0.929], [0.6033, 0.929], [0.6033, 0.9349], [0.6446, 0.9349], [0.6446, 0.9467], [0.6529, 0.9467], [0.6529, 0.9527], [0.6612, 0.9527], [0.6612, 0.9586], [0.686, 0.9586], [0.686, 0.9645], [0.719, 0.9645], [0.719, 0.9763], [0.7355, 0.9763], [0.7355, 0.9822], [0.7934, 0.9822], [0.7934, 0.9882], [0.9008, 0.9882], [0.9008, 0.9941], [0.9091, 0.9941], [0.9091, 1.0], [1.0, 1.0]]}, "nn": {"auc": 0.7936, "pts": [[0.0, 0.0], [0.0, 0.0059], [0.0, 0.0355], [0.0083, 0.0355], [0.0083, 0.0651], [0.0165, 0.0651], [0.0165, 0.1124], [0.0248, 0.1124], [0.0248, 0.1479], [0.0413, 0.1479], [0.0413, 0.2426], [0.0496, 0.2426], [0.0496, 0.2722], [0.0579, 0.2722], [0.0579, 0.3195], [0.0661, 0.3195], [0.0661, 0.3669], [0.0744, 0.3669], [0.0744, 0.3728], [0.0826, 0.3728], [0.0826, 0.3787], [0.0909, 0.3787], [0.0909, 0.4142], [0.0992, 0.4142], [0.0992, 0.4379], [0.1157, 0.4379], [0.1157, 0.4675], [0.124, 0.4675], [0.124, 0.4734], [0.1322, 0.4734], [0.1322, 0.4793], [0.1405, 0.4793], [0.1405, 0.5325], [0.1488, 0.5325], [0.1488, 0.568], [0.157, 0.568], [0.157, 0.6036], [0.1653, 0.6036], [0.1653, 0.6095], [0.1736, 0.6095], [0.1736, 0.6272], [0.1818, 0.6272], [0.1818, 0.645], [0.1901, 0.645], [0.1901, 0.6509], [0.2066, 0.6509], [0.2066, 0.6568], [0.2231, 0.6568], [0.2231, 0.6686], [0.2314, 0.6686], [0.2314, 0.6864], [0.2397, 0.6864], [0.2397, 0.7219], [0.2479, 0.7219], [0.2479, 0.7278], [0.2562, 0.7278], [0.2562, 0.7515], [0.2645, 0.7515], [0.2645, 0.7574], [0.2893, 0.7574], [0.2893, 0.7751], [0.3058, 0.7751], [0.3058, 0.7811], [0.3306, 0.7811], [0.3306, 0.787], [0.3388, 0.787], [0.3388, 0.7929], [0.3719, 0.7929], [0.3719, 0.7988], [0.3802, 0.7988], [0.3802, 0.8047], [0.405, 0.8047], [0.405, 0.8166], [0.4298, 0.8166], [0.4298, 0.8402], [0.438, 0.8402], [0.438, 0.8462], [0.4463, 0.8462], [0.4463, 0.858], [0.4545, 0.858], [0.4545, 0.8698], [0.4711, 0.8698], [0.4711, 0.8817], [0.5207, 0.8817], [0.5207, 0.8876], [0.5289, 0.8876], [0.5289, 0.8935], [0.5455, 0.8935], [0.5455, 0.9053], [0.5868, 0.9053], [0.5868, 0.9172], [0.595, 0.9172], [0.595, 0.9349], [0.6116, 0.9349], [0.6116, 0.9408], [0.6942, 0.9408], [0.6942, 0.9586], [0.719, 0.9586], [0.719, 0.9645], [0.7521, 0.9645], [0.7521, 0.9704], [0.7934, 0.9704], [0.7934, 0.9822], [0.8182, 0.9822], [0.8182, 0.9882], [0.9504, 0.9882], [0.9504, 1.0], [1.0, 1.0]]}}, "t2": {"tree": {"auc": 0.8947, "pts": [[0.0, 0.0], [0.0, 0.0112], [0.0, 0.4944], [0.0196, 0.4944], [0.0196, 0.573], [0.0392, 0.573], [0.0392, 0.5843], [0.0588, 0.5843], [0.0588, 0.6067], [0.0784, 0.6067], [0.0784, 0.6629], [0.098, 0.6629], [0.098, 0.7191], [0.1176, 0.7191], [0.1176, 0.7303], [0.1373, 0.7303], [0.1373, 0.809], [0.1765, 0.809], [0.1765, 0.8315], [0.1961, 0.8315], [0.1961, 0.8427], [0.2353, 0.8427], [0.2353, 0.8539], [0.3137, 0.8539], [0.3137, 0.8652], [0.3529, 0.8652], [0.3529, 0.8876], [0.3922, 0.8876], [0.3922, 0.8989], [0.4118, 0.8989], [0.4118, 0.9213], [0.5098, 0.9213], [0.5098, 0.9326], [0.5294, 0.9326], [0.5294, 0.9438], [0.549, 0.9438], [0.549, 0.9663], [0.5686, 0.9663], [0.5686, 0.9888], [0.8235, 0.9888], [0.8235, 1.0], [1.0, 1.0]]}, "nn": {"auc": 0.8793, "pts": [[0.0, 0.0], [0.0, 0.0112], [0.0, 0.3371], [0.0588, 0.3371], [0.0588, 0.4045], [0.0784, 0.4045], [0.0784, 0.6854], [0.098, 0.6854], [0.098, 0.7528], [0.1176, 0.7528], [0.1176, 0.764], [0.1373, 0.764], [0.1373, 0.7753], [0.2157, 0.7753], [0.2157, 0.8539], [0.2745, 0.8539], [0.2745, 0.8652], [0.2941, 0.8652], [0.2941, 0.8876], [0.3922, 0.8876], [0.3922, 0.9213], [0.4902, 0.9213], [0.4902, 0.9326], [0.5294, 0.9326], [0.5294, 0.9438], [0.5882, 0.9438], [0.5882, 0.9663], [0.6078, 0.9663], [0.6078, 0.9888], [0.6275, 0.9888], [0.6275, 1.0], [1.0, 1.0]]}}}, "20": {"t1": {"tree": {"auc": 0.8301, "pts": [[0.0, 0.0], [0.0, 0.0047], [0.0, 0.3505], [0.0137, 0.3505], [0.0137, 0.3738], [0.0274, 0.3738], [0.0274, 0.4206], [0.0411, 0.4206], [0.0411, 0.4533], [0.0548, 0.4533], [0.0548, 0.5187], [0.0685, 0.5187], [0.0685, 0.5421], [0.0959, 0.5421], [0.0959, 0.5514], [0.1096, 0.5514], [0.1096, 0.5748], [0.1507, 0.5748], [0.1507, 0.6075], [0.1644, 0.6075], [0.1644, 0.6121], [0.1781, 0.6121], [0.1781, 0.6355], [0.1918, 0.6355], [0.1918, 0.6682], [0.2192, 0.6682], [0.2192, 0.6729], [0.2329, 0.6729], [0.2329, 0.7664], [0.2603, 0.7664], [0.2603, 0.785], [0.2877, 0.785], [0.2877, 0.8178], [0.3014, 0.8178], [0.3014, 0.8271], [0.3151, 0.8271], [0.3151, 0.8364], [0.3288, 0.8364], [0.3288, 0.8458], [0.3562, 0.8458], [0.3562, 0.8551], [0.3836, 0.8551], [0.3836, 0.8598], [0.411, 0.8598], [0.411, 0.8738], [0.4658, 0.8738], [0.4658, 0.8879], [0.4932, 0.8879], [0.4932, 0.8925], [0.5342, 0.8925], [0.5342, 0.9019], [0.5616, 0.9019], [0.5616, 0.9065], [0.5753, 0.9065], [0.5753, 0.9112], [0.589, 0.9112], [0.589, 0.9206], [0.6027, 0.9206], [0.6027, 0.9299], [0.6712, 0.9299], [0.6712, 0.9346], [0.7123, 0.9346], [0.7123, 0.9393], [0.7397, 0.9393], [0.7397, 0.9579], [0.7534, 0.9579], [0.7534, 0.9673], [0.7671, 0.9673], [0.7671, 0.972], [0.8356, 0.972], [0.8356, 0.9813], [0.8493, 0.9813], [0.8493, 0.9907], [0.9041, 0.9907], [0.9041, 1.0], [1.0, 1.0]]}, "nn": {"auc": 0.7792, "pts": [[0.0, 0.0], [0.0, 0.0047], [0.0, 0.1168], [0.0137, 0.1168], [0.0137, 0.2243], [0.0274, 0.2243], [0.0274, 0.2944], [0.0411, 0.2944], [0.0411, 0.3411], [0.0548, 0.3411], [0.0548, 0.3832], [0.0685, 0.3832], [0.0685, 0.4019], [0.0959, 0.4019], [0.0959, 0.4159], [0.1096, 0.4159], [0.1096, 0.4346], [0.1233, 0.4346], [0.1233, 0.5047], [0.137, 0.5047], [0.137, 0.5701], [0.1507, 0.5701], [0.1507, 0.5794], [0.1918, 0.5794], [0.1918, 0.5841], [0.2055, 0.5841], [0.2055, 0.5935], [0.2192, 0.5935], [0.2192, 0.6215], [0.2329, 0.6215], [0.2329, 0.6308], [0.2466, 0.6308], [0.2466, 0.6449], [0.2877, 0.6449], [0.2877, 0.715], [0.3014, 0.715], [0.3014, 0.7336], [0.3151, 0.7336], [0.3151, 0.7383], [0.3288, 0.7383], [0.3288, 0.743], [0.3425, 0.743], [0.3425, 0.7523], [0.3562, 0.7523], [0.3562, 0.757], [0.3836, 0.757], [0.3836, 0.771], [0.411, 0.771], [0.411, 0.7944], [0.4521, 0.7944], [0.4521, 0.8131], [0.4658, 0.8131], [0.4658, 0.8271], [0.4795, 0.8271], [0.4795, 0.8364], [0.4932, 0.8364], [0.4932, 0.8411], [0.5342, 0.8411], [0.5342, 0.8879], [0.5479, 0.8879], [0.5479, 0.9159], [0.5616, 0.9159], [0.5616, 0.9206], [0.5753, 0.9206], [0.5753, 0.9252], [0.6027, 0.9252], [0.6027, 0.9346], [0.6301, 0.9346], [0.6301, 0.9393], [0.6438, 0.9393], [0.6438, 0.9486], [0.6849, 0.9486], [0.6849, 0.9533], [0.7671, 0.9533], [0.7671, 0.9579], [0.7945, 0.9579], [0.7945, 0.9626], [0.863, 0.9626], [0.863, 0.9673], [0.8904, 0.9673], [0.8904, 0.972], [0.9041, 0.972], [0.9041, 0.9953], [0.9452, 0.9953], [0.9452, 1.0], [1.0, 1.0]]}}, "t2": {"tree": {"auc": 0.9811, "pts": [[0.0, 0.0], [0.0, 0.0079], [0.0, 0.9134], [0.2, 0.9134], [0.2, 0.9921], [0.4, 0.9921], [0.4, 1.0], [1.0, 1.0]]}, "nn": {"auc": 0.9433, "pts": [[0.0, 0.0], [0.0, 0.0079], [0.0, 0.8661], [0.2, 0.8661], [0.2, 0.8976], [0.4, 0.8976], [0.4, 0.9843], [1.0, 0.9843], [1.0, 1.0]]}}}}, "thr": {"50": {"t1": [{"rule": "Fixed 0.50", "thr": 0.5, "used": false, "mcc": 0.5126, "ba": 0.7571, "f1": 0.794, "sens": 0.787, "spec": 0.7273}, {"rule": "CV max MCC", "thr": 0.54, "used": false, "mcc": 0.4872, "ba": 0.7453, "f1": 0.7795, "sens": 0.7633, "spec": 0.7273}, {"rule": "CV Youden's J", "thr": 0.572, "used": true, "mcc": 0.4781, "ba": 0.7423, "f1": 0.761, "sens": 0.716, "spec": 0.7686}], "t2": [{"rule": "Fixed 0.50", "thr": 0.5, "used": false, "mcc": 0.5449, "ba": 0.7659, "f1": 0.8415, "sens": 0.8652, "spec": 0.6667}, {"rule": "CV max MCC", "thr": 0.54, "used": false, "mcc": 0.5819, "ba": 0.7897, "f1": 0.8492, "sens": 0.8539, "spec": 0.7255}, {"rule": "CV Youden's J", "thr": 0.572, "used": true, "mcc": 0.6289, "ba": 0.8219, "f1": 0.8538, "sens": 0.8202, "spec": 0.8235}]}, "20": {"t1": [{"rule": "Fixed 0.50", "thr": 0.5, "used": false, "mcc": 0.2973, "ba": 0.6044, "f1": 0.862, "sens": 0.9486, "spec": 0.2603}, {"rule": "CV max MCC", "thr": 0.58, "used": false, "mcc": 0.3856, "ba": 0.6679, "f1": 0.8647, "sens": 0.9112, "spec": 0.4247}, {"rule": "CV Youden's J", "thr": 0.713, "used": true, "mcc": 0.4562, "ba": 0.7551, "f1": 0.8154, "sens": 0.743, "spec": 0.7671}], "t2": [{"rule": "Fixed 0.50", "thr": 0.5, "used": false, "mcc": 0.4472, "ba": 0.8606, "f1": 0.9551, "sens": 0.9213, "spec": 0.8}, {"rule": "CV max MCC", "thr": 0.58, "used": false, "mcc": 0.4993, "ba": 0.9488, "f1": 0.9461, "sens": 0.8976, "spec": 1.0}, {"rule": "CV Youden's J", "thr": 0.713, "used": true, "mcc": 0.3659, "ba": 0.9016, "f1": 0.8908, "sens": 0.8031, "spec": 1.0}]}}, "nn_cfg": {"50": {"n_hidden": 1, "neurons": 256, "dropout": 0.5, "cv_auc": 0.7098, "n_configs": 27}, "20": {"n_hidden": 1, "neurons": 64, "dropout": 0.2, "cv_auc": 0.753, "n_configs": 27}}};
+
+const NS='http://www.w3.org/2000/svg';
+const S=(t,a,p,txt)=>{const e=document.createElementNS(NS,t);for(const k in a)e.setAttribute(k,a[k]);if(txt!=null)e.textContent=txt;if(p)p.appendChild(e);return e};
+const H=(t,c,p,txt)=>{const e=document.createElement(t);if(c)e.className=c;if(txt!=null)e.textContent=txt;if(p)p.appendChild(e);return e};
+const f3=v=>v.toFixed(3), pct=v=>v.toFixed(1)+'%';
+const tip=H('div','',document.body);tip.id='tip';
+function showTip(ev,html){tip.innerHTML=html;tip.style.opacity=1;const r=tip.getBoundingClientRect();
+  let x=ev.clientX+14,y=ev.clientY+14;if(x+r.width>innerWidth-8)x=ev.clientX-r.width-14;if(y+r.height>innerHeight-8)y=ev.clientY-r.height-14;
+  tip.style.left=x+'px';tip.style.top=y+'px'}
+function hideTip(){tip.style.opacity=0}
+function hover(node,mark,html){node.addEventListener('mousemove',e=>{mark.classList.add('hot');showTip(e,html)});
+  node.addEventListener('mouseleave',()=>{mark.classList.remove('hot');hideTip()})}
+
+function card(host,o){const c=H('section','card',host);H('h3','',c,o.title);if(o.sub)H('div','sub',c,o.sub);
+  const lg=H('div','legend',c),body=H('div','',c),tools=H('div','tools',c),note=H('div','note',tools,o.note||''),
+  btn=H('button','dbtn',tools,'Show data'),dt=H('div','dt tw',c);
+  btn.onclick=()=>{const on=dt.classList.toggle('open');btn.textContent=on?'Hide data':'Show data'};
+  return{body,legend(items,line){lg.innerHTML='';items.forEach(it=>{const s=H('span',line?'ln':'',lg);H('i','b'+it.k,s);s.append(it.name)})},
+    table(head,rows){dt.innerHTML='';table(dt,head,rows)}}}
+function table(host,head,rows){const t=H('table','',host),tr=H('tr','',H('thead','',t));head.forEach(h=>H('th','',tr,h));
+  const tb=H('tbody','',t);rows.forEach(r=>{const x=H('tr','',tb);r.forEach(v=>H('td','',x,v))});return t}
+function topRound(x,y,w,h,r){r=Math.min(r,w/2,h);return`M${x},${y+h}V${y+r}Q${x},${y} ${x+r},${y}H${x+w-r}Q${x+w},${y} ${x+w},${y+r}V${y+h}Z`}
+function rightRound(x,y,w,h,r){r=Math.min(r,h/2,w);return`M${x},${y}H${x+w-r}Q${x+w},${y} ${x+w},${y+r}V${y+h-r}Q${x+w},${y+h} ${x+w-r},${y+h}H${x}Z`}
+
+// grouped vertical bars: o={cats,series:[{name,k,vals,tips?}],max,ref,fmt,h}
+function bars(host,o){const W=560,Hh=o.h||270,m={l:34,r:o.ref?56:8,t:20,b:o.cats.some(c=>c.includes('\n'))?50:34},pw=W-m.l-m.r,ph=Hh-m.t-m.b,
+  max=o.max||1,fmt=o.fmt||f3,y=v=>m.t+ph*(1-v/max),svg=S('svg',{viewBox:`0 0 ${W} ${Hh}`,role:'img'},host);
+  for(let i=0;i<=4;i++){const v=max*i/4;S('line',{class:i?'gridl':'axis',x1:m.l,x2:W-m.r,y1:y(v),y2:y(v)},svg);
+    S('text',{class:'tick',x:m.l-6,y:y(v)+4,'text-anchor':'end'},svg,(max<=1?v.toFixed(2):v.toFixed(0)))}
+  if(o.ref){S('line',{class:'ref',x1:m.l,x2:W-m.r,y1:y(o.ref.v),y2:y(o.ref.v)},svg);
+    S('text',{class:'tick',x:W-m.r+5,y:y(o.ref.v)+4},svg,o.ref.label)}
+  const ns=o.series.length,gw=pw/o.cats.length,bw=Math.min(54,(gw-18)/ns-2),tot=ns*(bw+2)-2,many=ns*o.cats.length>12;
+  o.cats.forEach((c,ci)=>{const gx=m.l+gw*ci+(gw-tot)/2;
+    c.split('\n').forEach((ln,li)=>S('text',{class:li?'tick':'cat',x:m.l+gw*(ci+.5),y:Hh-m.b+17+li*15,'text-anchor':'middle'},svg,ln));
+    o.series.forEach((s,si)=>{const v=s.vals[ci];if(v==null)return;const x=gx+si*(bw+2),p=S('path',{class:'s'+s.k,d:topRound(x,y(v),bw,ph*v/max,4)},svg);
+      if(!many)S('text',{class:'val',x:x+bw/2,y:y(v)-5,'text-anchor':'middle','font-size':bw<34?10.5:12},svg,fmt(v));
+      const hit=S('rect',{class:'hit',x:x-1,y:m.t,width:bw+2,height:ph},svg);
+      hover(hit,p,`<b>${c.split('\n')[0]}</b><br>${s.name}: <b>${fmt(v)}</b>${s.tips&&s.tips[ci]?'<br>'+s.tips[ci]:''}`)})});return svg}
+
+// horizontal bars: o={rows:[{label,val,k,tip}],max,fmt,lab}
+function hbars(host,o){const rh=24,W=560,lab=o.lab||150,m={t:6,b:22,r:52},Hh=m.t+m.b+rh*o.rows.length,pw=W-lab-m.r,max=o.max||1,fmt=o.fmt||f3,
+  x=v=>lab+pw*v/max,svg=S('svg',{viewBox:`0 0 ${W} ${Hh}`,role:'img'},host);
+  for(let i=0;i<=4;i++){const v=max*i/4;S('line',{class:i?'gridl':'axis',x1:x(v),x2:x(v),y1:m.t,y2:Hh-m.b},svg);
+    S('text',{class:'tick',x:x(v),y:Hh-6,'text-anchor':'middle'},svg,o.tick?o.tick(v):v.toFixed(2))}
+  if(o.ref){S('line',{class:'ref',x1:x(o.ref.v),x2:x(o.ref.v),y1:m.t,y2:Hh-m.b},svg)}
+  o.rows.forEach((r,i)=>{const yy=m.t+rh*i+3,p=S('path',{class:'s'+r.k,d:rightRound(lab,yy,Math.max(1,pw*r.val/max),rh-6,4)},svg);
+    S('text',{class:'cat',x:lab-8,y:yy+rh/2+1,'text-anchor':'end'},svg,r.label);
+    S('text',{class:'val',x:x(r.val)+6,y:yy+rh/2+1},svg,fmt(r.val));
+    hover(S('rect',{class:'hit',x:0,y:m.t+rh*i,width:W,height:rh},svg),p,`<b>${r.label}</b><br>${fmt(r.val)}${r.tip?'<br>'+r.tip:''}`)});return svg}
+
+// ROC curves: o={series:[{name,k,pts,auc}]}
+function roc(host,o){const W=560,Hh=330,m={l:44,r:14,t:10,b:40},pw=W-m.l-m.r,ph=Hh-m.t-m.b,X=v=>m.l+pw*v,Y=v=>m.t+ph*(1-v),
+  svg=S('svg',{viewBox:`0 0 ${W} ${Hh}`,role:'img'},host);
+  for(let i=0;i<=4;i++){const v=i/4;S('line',{class:i?'gridl':'axis',x1:m.l,x2:W-m.r,y1:Y(v),y2:Y(v)},svg);
+    S('line',{class:i?'gridl':'axis',x1:X(v),x2:X(v),y1:m.t,y2:Hh-m.b},svg);
+    S('text',{class:'tick',x:m.l-6,y:Y(v)+4,'text-anchor':'end'},svg,v.toFixed(2));S('text',{class:'tick',x:X(v),y:Hh-m.b+15,'text-anchor':'middle'},svg,v.toFixed(2))}
+  S('text',{x:m.l+pw/2,y:Hh-4,'text-anchor':'middle'},svg,'False positive rate (1 − specificity)');
+  S('text',{x:12,y:m.t+ph/2,'text-anchor':'middle',transform:`rotate(-90 12 ${m.t+ph/2})`},svg,'True positive rate');
+  S('line',{class:'ref',x1:X(0),y1:Y(0),x2:X(1),y2:Y(1)},svg);
+  o.series.forEach(s=>S('polyline',{class:'l'+s.k,fill:'none','stroke-width':2,'stroke-linejoin':'round',points:s.pts.map(p=>X(p[0])+','+Y(p[1])).join(' ')},svg));
+  const cross=S('line',{class:'axis',y1:m.t,y2:Hh-m.b,x1:0,x2:0,visibility:'hidden'},svg),
+  dots=o.series.map(s=>S('circle',{class:'s'+s.k,r:4.5,stroke:'var(--surface)','stroke-width':2,visibility:'hidden'},svg)),
+  at=(pts,f)=>{let t=0;for(const p of pts){if(p[0]<=f)t=Math.max(t,p[1]);else break}return t},
+  hit=S('rect',{class:'hit',x:m.l,y:m.t,width:pw,height:ph},svg);
+  hit.addEventListener('mousemove',e=>{const b=svg.getBoundingClientRect(),f=Math.min(1,Math.max(0,((e.clientX-b.left)/b.width*W-m.l)/pw));
+    cross.setAttribute('x1',X(f));cross.setAttribute('x2',X(f));cross.setAttribute('visibility','visible');
+    let h=`<b>FPR ${f.toFixed(2)}</b>`;o.series.forEach((s,i)=>{const t=at(s.pts,f);dots[i].setAttribute('cx',X(f));dots[i].setAttribute('cy',Y(t));
+      dots[i].setAttribute('visibility','visible');h+=`<br>${s.name}: TPR <b>${t.toFixed(2)}</b>`});showTip(e,h)});
+  hit.addEventListener('mouseleave',()=>{cross.setAttribute('visibility','hidden');dots.forEach(d=>d.setAttribute('visibility','hidden'));hideTip()});return svg}
+
+// 100% split bars: o={rows:[{label,a,b}],names:[a,b]}
+function split(host,o){const rh=34,W=560,lab=190,m={t:4,b:6},pw=W-lab-8,Hh=m.t+m.b+rh*o.rows.length,svg=S('svg',{viewBox:`0 0 ${W} ${Hh}`,role:'img'},host);
+  o.rows.forEach((r,i)=>{const yy=m.t+rh*i+5,wa=pw*r.a/100,wb=pw-wa-2;
+    S('text',{class:'cat',x:lab-8,y:yy+16,'text-anchor':'end'},svg,r.label);
+    const pa=S('rect',{class:'s1',x:lab,y:yy,width:wa,height:rh-10,rx:4},svg),pb=S('rect',{class:'s2',x:lab+wa+2,y:yy,width:wb,height:rh-10,rx:4},svg);
+    S('text',{x:lab+8,y:yy+16,class:'onbar'},svg,pct(r.a));
+    S('text',{x:lab+pw-8,y:yy+16,'text-anchor':'end',class:'onbar'},svg,pct(r.b));
+    hover(pa,pa,`<b>${r.label}</b><br>${o.names[0]}: <b>${pct(r.a)}</b>`);hover(pb,pb,`<b>${r.label}</b><br>${o.names[1]}: <b>${pct(r.b)}</b>`)});return svg}
+
+const CUT={'50':'50% threshold','20':'20% threshold'};
+const tsLabel=(c,i)=>{const t=D.final[c].tree['t'+i];return`Test set ${i}\nn = ${t.n} (${t.high} High / ${t.low} Low)`};
+
+const CH={
+ final(host,c){const F=D.final[c],k=card(host,{title:'External test sets: tree ensemble vs neural network',sub:`ROC-AUC, ${CUT[c]}`,
+    note:c=='20'?'Test set 2 has only 5 Low molecules at this threshold.':''});
+  k.legend([{k:1,name:F.tree.name},{k:2,name:'Neural network ('+F.nn.name+')'}]);
+  bars(k.body,{cats:[tsLabel(c,1),tsLabel(c,2)],ref:{v:.5,label:'chance'},series:[{name:F.tree.name,k:1,vals:[F.tree.t1.auc,F.tree.t2.auc]},{name:'Neural network',k:2,vals:[F.nn.t1.auc,F.nn.t2.auc]}]});
+  k.table(['Model','Test set','ROC-AUC','MCC','Bal. acc.','F1','Sens.','Spec.'],[['tree',1],['tree',2],['nn',1],['nn',2]].map(([m,i])=>{const r=F[m]['t'+i];
+    return[F[m].name,'Test set '+i,f3(r.auc),f3(r.mcc),f3(r.ba),f3(r.f1),f3(r.sens),f3(r.spec)]}))},
+ roc(host,c,state){const t=state.ts||'t1',R=D.roc[c][t],F=D.final[c],k=card(host,{title:'ROC curves on the external test sets',sub:`${CUT[c]} · Test set ${t[1]}`});
+  const seg=H('div','seg',null);['t1','t2'].forEach(x=>{const b=H('button','',seg,'Test set '+x[1]);b.setAttribute('aria-pressed',x==t);
+    b.onclick=()=>{state.ts=x;const old=k.body.parentNode,nu=document.createElement('div');CH.roc(nu,c,state);old.parentNode.replaceChild(nu.firstChild,old)}});
+  k.body.parentNode.insertBefore(seg,k.body.previousSibling);seg.style.marginBottom='8px';
+  k.legend([{k:1,name:`${F.tree.name} (AUC ${f3(R.tree.auc)})`},{k:2,name:`Neural network (AUC ${f3(R.nn.auc)})`}],true);
+  roc(k.body,{series:[{name:'Tree ensemble',k:1,pts:R.tree.pts},{name:'Neural network',k:2,pts:R.nn.pts}]});
+  k.table(['Model','ROC-AUC'],[[F.tree.name,f3(R.tree.auc)],['Neural network',f3(R.nn.auc)]])},
+ profile(host,c){const T=D.final[c].tree,M=[['mcc','MCC'],['ba','Balanced acc.'],['f1','F1'],['sens','Sensitivity'],['spec','Specificity']],
+  k=card(host,{title:'Metric profile of the final model',sub:`${T.name}, ${CUT[c]}, decision threshold ${T.t1.thr}`});
+  k.legend([{k:1,name:'Test set 1'},{k:2,name:'Test set 2'}]);
+  bars(k.body,{cats:M.map(x=>x[1]),series:[{name:'Test set 1',k:1,vals:M.map(x=>T.t1[x[0]])},{name:'Test set 2',k:2,vals:M.map(x=>T.t2[x[0]])}]});
+  k.table(['Test set','n','TP','FP','TN','FN'].concat(M.map(x=>x[1])),[1,2].map(i=>{const r=T['t'+i];return['Test set '+i,r.n,r.TP,r.FP,r.TN,r.FN].concat(M.map(x=>f3(r[x[0]])))}))},
+ cv(host,c){const k=card(host,{title:'Model screening',sub:`Out-of-fold ROC-AUC, 5-fold cross-validation, ${CUT[c]}`});
+  hbars(k.body,{rows:D.cv[c].map(m=>({label:m.model,val:m.auc,k:1,tip:'MCC '+f3(m.mcc)})),ref:{v:.5}});
+  k.table(['Model','ROC-AUC','MCC'],D.cv[c].map(m=>[m.model,f3(m.auc),f3(m.mcc)]))},
+ fs(host,c){const F=D.fs[c],k=card(host,{title:'Feature selection: MI ∩ CatBoost vs Elastic Net',sub:`ExtraTrees ROC-AUC, ${CUT[c]}`});
+  k.legend([{k:1,name:`MI ∩ CatBoost (${F[0].n_mi} descriptors)`},{k:2,name:`Elastic Net (${F[0].n_en} descriptors)`}]);
+  bars(k.body,{cats:F.map(r=>r.stage),ref:{v:.5,label:'chance'},series:[{name:'MI ∩ CatBoost',k:1,vals:F.map(r=>r.mi)},{name:'Elastic Net',k:2,vals:F.map(r=>r.en)}]});
+  k.table(['Evaluation','MI ∩ CatBoost','Elastic Net','Difference'],F.map(r=>[r.stage,f3(r.mi),f3(r.en),(r.mi-r.en>=0?'+':'−')+Math.abs(r.mi-r.en).toFixed(3)]))},
+ d23(host,c){const A=D.d23[c].A,B=D.d23[c].B,kk=B[0].n,k=card(host,{title:'2D vs 3D descriptors',sub:`Cross-validated ROC-AUC, ${CUT[c]}`});
+  k.legend([{k:1,name:'Selected feature set'},{k:2,name:`Equal size (top-${kk} of each)`}]);
+  bars(k.body,{cats:['2D only','3D only','2D + 3D'],ref:{v:.5,label:'chance'},series:[{name:'Selected feature set',k:1,vals:A.map(r=>r.auc),tips:A.map(r=>r.n+' descriptors')},
+    {name:'Equal size',k:2,vals:B.map(r=>r.auc),tips:B.map(r=>r.n+' descriptors')}]});
+  k.table(['Experiment','Descriptor set','Descriptors','ROC-AUC','MCC'],A.map(r=>['Selected set',r.set,r.n,f3(r.auc),f3(r.mcc)]).concat(B.map(r=>['Equal size',r.set,r.n,f3(r.auc),f3(r.mcc)])))},
+ shap(host,c){const T=D.shap[c],mx=Math.ceil(T[0].val*1000/2)*2/1000,k=card(host,{title:'Top 15 descriptors by SHAP importance',sub:`Mean |SHAP| of the final tree model, training set, ${CUT[c]}`});
+  k.legend([{k:1,name:'2D descriptor'},{k:2,name:'3D descriptor'}]);
+  hbars(k.body,{rows:T.map(r=>({label:r.name,val:r.val,k:r.type=='3D'?2:1,tip:`${r.type} descriptor<br>higher value → ${r.dir} HOB`})),max:mx,fmt:v=>v.toFixed(4),tick:v=>v.toFixed(3),lab:120});
+  k.table(['Rank','Descriptor','Type','Mean |SHAP|','Higher value pushes to'],T.map((r,i)=>[i+1,r.name,r.type,r.val.toFixed(4),r.dir+' HOB']))},
+ share(host,c){const s=D.share[c],rows=[{label:'Tree model: descriptors',a:100-s.tree.desc3,b:s.tree.desc3},{label:'Tree model: SHAP importance',a:100-s.tree.shap3,b:s.tree.shap3}];
+  if(s.nn)rows.push({label:'Neural net: descriptors',a:100-s.nn.desc3,b:s.nn.desc3},{label:'Neural net: SHAP importance',a:100-s.nn.shap3,b:s.nn.shap3});
+  const k=card(host,{title:'Share of 2D and 3D descriptors',sub:`Share of the descriptor set vs share of total mean |SHAP|, ${CUT[c]}`,
+    note:`Tree model uses ${s.tree.n2+s.tree.n3} selected descriptors; the neural network uses all ${s.nn?s.nn.n2+s.nn.n3:''}.`});
+  k.legend([{k:1,name:'2D'},{k:2,name:'3D'}]);split(k.body,{rows,names:['2D','3D']});
+  k.table(['','2D','3D'],rows.map(r=>[r.label,pct(r.a),pct(r.b)]))},
+ thr(host,c){const T=D.thr[c].t1,M=[['mcc','MCC'],['ba','Balanced acc.'],['sens','Sensitivity'],['spec','Specificity']],
+  k=card(host,{title:'Effect of the decision threshold',sub:`Final tree model on Test set 1, ${CUT[c]}`,note:'The threshold was fixed on training data (Youden’s J) before the test sets were used.'});
+  k.legend(T.map((t,i)=>({k:i+1,name:`${t.rule} (${t.thr})${t.used?' — used':''}`})));
+  bars(k.body,{cats:M.map(x=>x[1]),series:T.map((t,i)=>({name:t.rule,k:i+1,vals:M.map(x=>t[x[0]])}))});
+  k.table(['Rule','Threshold'].concat(M.map(x=>x[1])),T.map(t=>[t.rule+(t.used?' (used)':''),t.thr].concat(M.map(x=>f3(t[x[0]])))))}
+};
+
+const order=['final','roc','profile','cv','fs','d23','shap','share','thr'],state={};
+const TAKE={
+ final:c=>{const F=D.final[c];return`The tree model scores higher than the neural network on both test sets (${f3(F.tree.t1.auc)} vs ${f3(F.nn.t1.auc)} and ${f3(F.tree.t2.auc)} vs ${f3(F.nn.t2.auc)}).`},
+ roc:c=>'The closer a curve runs to the top-left corner, the better the model separates High from Low molecules. The dashed diagonal is a random guess.',
+ profile:c=>{const t=D.final[c].tree.t1;return`With the decision threshold tuned on training data, sensitivity (${f3(t.sens)}) and specificity (${f3(t.spec)}) stay close on Test set 1.`},
+ cv:c=>`${D.cv[c][0].model} leads the screening (${f3(D.cv[c][0].auc)}), and the three tree-based models rank above all others.`,
+ fs:c=>{const m=Math.max(...D.fs[c].map(r=>Math.abs(r.mi-r.en)));return`The two descriptor sets give almost the same ROC-AUC; the largest gap is ${m.toFixed(3)}.`},
+ d23:c=>{const A=D.d23[c].A;return`2D descriptors alone (${f3(A[0].auc)}) match the full set (${f3(A[2].auc)}), while 3D descriptors alone are lower (${f3(A[1].auc)}).`},
+ shap:c=>{const n=D.shap[c].filter(r=>r.type=='3D').length;return`Each bar is the average size of a descriptor’s effect on the prediction. ${n} of the top 15 descriptors are 3D.`},
+ share:c=>{const s=D.share[c].tree;return`3D descriptors are ${pct(s.desc3)} of the tree model’s descriptor set but ${pct(s.shap3)} of its SHAP importance.`},
+ thr:c=>{const T=D.thr[c].t1,a=T[0],b=T[T.length-1];return`Moving from 0.50 to the Youden threshold (${b.thr}) changes specificity from ${f3(a.spec)} to ${f3(b.spec)} and sensitivity from ${f3(a.sens)} to ${f3(b.sens)}.`}
+};
+order.forEach(n=>{const orig=CH[n];CH[n]=(host,c,st)=>{orig(host,c,st);const el=host.lastElementChild,p=H('p','take',null,TAKE[n](c));
+  el.insertBefore(p,el.querySelector('.tools'))}});
+function draw(c){const g=document.getElementById('g');g.innerHTML='';order.forEach(n=>CH[n](g,c,state));
+  document.querySelectorAll('#cut button').forEach(b=>b.setAttribute('aria-pressed',b.dataset.c==c))}
+document.querySelectorAll('#cut button').forEach(b=>b.onclick=()=>draw(b.dataset.c));draw('50');
+</script>
+</body></html>
