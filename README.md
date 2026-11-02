@@ -16,7 +16,7 @@ Human oral bioavailability (HOB) is the fraction of an orally administered dose 
 
 ## Results dashboard
 
-The main results are published with GitHub Pages:
+The main results are published with GitHub Pages at [tsiantoukam-ux.github.io/predictinghob](https://tsiantoukam-ux.github.io/predictinghob/):
 
 - [Charts dashboard](https://tsiantoukam-ux.github.io/predictinghob/dashboard.html) — metrics and SHAP figures for both cutoffs.
 - [Research summary (PDF)](https://tsiantoukam-ux.github.io/predictinghob/summary.pdf)
