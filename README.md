@@ -14,6 +14,13 @@ Human oral bioavailability (HOB) is the fraction of an orally administered dose 
 - **Evaluation:** all decisions are made with 5-fold cross-validation on the training set. Two external test sets are used once, at the very end.
 - **Interpretation:** SHAP values for both the tree models and the neural network, including the share of 2D versus 3D descriptors.
 
+## Results dashboard
+
+The main results are published with GitHub Pages:
+
+- [Charts dashboard](https://tsiantoukam-ux.github.io/predictinghob/dashboard.html) — metrics and SHAP figures for both cutoffs.
+- [Research summary (PDF)](https://tsiantoukam-ux.github.io/predictinghob/summary.pdf)
+
 ## Dataset
 
 The data come from HobPre (Wei et al., 2022). Each molecule is given as a SMILES string with its experimental HOB value and two binary labels.
